@@ -26,16 +26,16 @@ module.exports = function validateLoginInput(data) {
         errors.email = 'Email is required';
     }
     if (!Validator.isEmail(data.email)) {
-        errors.email = 'Email is invalid1';
+        errors.email = 'Email is invalid';
     }
     if (Validator.isEmpty(data.password)) {
         errors.password = 'Password is required';
     }
     if (Validator.isEmpty(data.confirmPassword)) {
-        errors.confirmPassword = 'Confirm Passowrd is required';
+        errors.confirmPassword = 'Confirm Password is required';
     }
     if (!Validator.equals(data.password, data.confirmPassword)) {
-        errors.password = 'Passwords must match';
+        errors.confirmPassword = 'Passwords must match';
     }
     return {
         errors,
