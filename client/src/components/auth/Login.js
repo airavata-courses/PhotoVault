@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import classnames from 'classnames';
+import jwt_decode from 'jwt-decode';
 
 class Login extends Component {
 
@@ -26,9 +27,31 @@ class Login extends Component {
             password: this.state.password
         }
         //console.log(newUser);
+
+        const str = "Abc";
+
+
         axios.post('api/users/login', newUser)
-            .then(res => console.log(res.data))
+            .then(res => {
+                // Save to localStorage
+                const { token } = res.data;
+                // Set token to ls
+                localStorage.setItem('jwtToken', token);
+                // Set token to Auth header
+                axios.defaults.headers.common['Authorization'] = token;
+                // Decode token to get user data
+                const decoded = jwt_decode(token);
+                // Set current user
+                localStorage.setItem('user', decoded.id);
+                localStorage.setItem('userEmail', decoded.email);
+                // dispatch(setCurrentUser(decoded));
+                console.log(localStorage.getItem('user'));
+            })
             .catch(err => this.setState({ errors: err.response.data }));
+
+        /*axios.get('http://10.0.0.114:5000/api/fileOps/' + str)
+            .then(res => console.log(res))
+            .catch(err => console.log(err));*/
     }
 
     render() {

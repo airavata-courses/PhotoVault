@@ -1,31 +1,53 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+import setAuthToken from './utils/setAuthToken';
+import jwt_decode from 'jwt-decode';
 
 import Navbar from './components/layout/Navbar';
 import Landing from './components/layout/Landing';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
+import Gallery from './components/layout/PhotoGallery';
 
 import './App.css';
-const store = createStore(() => [], {}, applyMiddleware());
+
+// Check for token
+if (localStorage.jwtToken) {
+  // Set auth token header auth
+  setAuthToken(localStorage.jwtToken);
+  // Decode token and get user info and exp
+  const decoded = jwt_decode(localStorage.jwtToken);
+  // Set user and isAuthenticated
+  localStorage.setItem('user', decoded.id);
+
+  // Check for expired token
+  const currentTime = Date.now() / 1000;
+  if (decoded.exp < currentTime) {
+    // Logout user
+    localStorage.removeItem('jwtToken');
+    setAuthToken(false);
+    // Redirect to login
+    window.location.href = '/login';
+  }
+}
+
 class App extends Component {
   render() {
     return (
-      <Provider store={store}>
-        <Router>
-          <div className="App">
-            <Navbar />
-            <Route exact path="/" component={Landing} />
 
-            <div className="container">
-              <Route exact path="/login" component={Login} />
-              <Route exact path="/register" component={Register} />
-            </div>
+      <Router>
+        <div className="App">
+          <Navbar />
+          <Route exact path="/" component={Landing} />
+
+          <div className="container">
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/gallery" component={Gallery} />
           </div>
-        </Router>
-      </Provider >
+        </div>
+      </Router>
+
     );
   }
 }

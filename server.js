@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const users = require('./routes/api/users');
 const profile = require('./routes/api/profile');
 const passport = require('passport');
+const cors = require('cors');
 
 //DB connection
 const db = require('./config/keys').mongoURI;
@@ -35,4 +36,6 @@ app.use(bodyParser.json());
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 app.use('/api/users', users);
 app.use('/api/profile', profile);
+app.use(cors());
+
 module.exports = app;

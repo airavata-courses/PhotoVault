@@ -92,7 +92,7 @@ router.post('/login', (req, res) => {
           else {
 
             //User matched
-            const payload = { id: user.id, lastName: user.lastName };
+            const payload = { id: user.id, email: user.email, lastName: user.lastName };
             jwt.sign(payload, keys.secret, { expiresIn: 3600 }, (err, token) => {
               res.json(
                 {
