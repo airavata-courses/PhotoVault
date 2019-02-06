@@ -17,7 +17,7 @@ public class Media {
     int userId;
 	String userEmail;
     String fileName;
-    String downloadLink;
+    String src;
     String filePath;
     String accessRights;
     String caption;
@@ -26,7 +26,7 @@ public class Media {
     String dateUpload;
     String location;
     String fileType;
-    String thumbnailLink;
+    String thumbnail;
     
     public Media ()
     {
@@ -55,7 +55,7 @@ public class Media {
 	}
 
 	public void setDownloadLink(String downloadLink) {
-		this.downloadLink = downloadLink;
+		this.src = downloadLink;
 	}
 
 	public void setFilePath(String filePath) {
@@ -91,6 +91,6 @@ public class Media {
 	}
 
 	public void setThumbnailLink(String thumbnailLink) {
-		this.thumbnailLink = thumbnailLink;
+		this.thumbnail = thumbnailLink;
 	}
 }
