@@ -1,47 +1,53 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 //Create Schema
-const MediaSchema = new Schema({
-  userId: {
-    type: String,
-    required: true
+const Photovault_photomedia = new Schema(
+  {
+    userId: {
+      type: String
+    },
+    userEmail: {
+      type: String
+    },
+    fileName: {
+      type: String
+    },
+    downloadLink: {
+      type: String
+    },
+    filePath: {
+      type: String
+    },
+    accessRights: {
+      type: String
+    },
+    caption: {
+      type: String
+    },
+    hashtag: {
+      type: String
+    },
+    size: {
+      type: String
+    },
+    dateUpload: {
+      type: Date
+    },
+    location: {
+      type: String
+    },
+    fileType: {
+      type: String
+    },
+    thumbnailLink: {
+      type: String
+    }
   },
-  userEmail: {
-    type: String,
-    required: true
-  },
-  fileName: {
-    type: String,
-    required: true
-  },
-  downloadLink: {
-    type: String,
-    required: true
-  },
-  filePath: {
-    type: String,
-    required: true
-  },
-  accessRights: {
-    type: String,
-    required: true
-  },
-  caption: {
-    type: String
-  },
-  hashtag: {
-    type: String
-  },
-  size: {
-    type: String
-  },
-  dateUpload: {
-    type: Date
-  },
-  location: {
-    type: String
-  }
-});
+  { collection: "photovault_photomedia" }
+);
 
-module.exports = MediaFile = mongoose.model('mediaFile', MediaSchema);
+module.exports = MediaFile = mongoose.model(
+  "photovault_photomedia",
+  Photovault_photomedia
+);
