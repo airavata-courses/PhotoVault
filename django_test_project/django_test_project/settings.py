@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
+import cloudinary
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,7 +26,7 @@ SECRET_KEY = '5o7xs#_rneq$%u_9l+vg&$w7@3gn)8zq0(vg8u94^u2ts-iw@@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['149.161.168.207','localhost ']
 
 
 # Application definition
@@ -39,7 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'cloudinary',
-    #'photovault',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -50,6 +51,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 
@@ -84,7 +87,6 @@ CLOUDINARY_API_KEY="511629731985125"
 CLOUDINARY_API_SECRET="Hz9Vupt0SuSyLVxoev-L7yCAulE"  
 
 # Cloudinary settings using python code. Run before pycloudinary is used.
-import cloudinary
 cloudinary.config(
   cloud_name = 'photovault',  
   api_key = '511629731985125',  
@@ -110,9 +112,9 @@ DATABASES = {
      'default': {
          'ENGINE': 'djongo',
          'NAME': 'photovault',
-         'HOST': 'mongodb://dev:dev1PhotoVault@ds161804.mlab.com:61804/photovault',
-         'USER': 'dev',
-         'PASSWORD': 'dev1PhotoVault',
+         'HOST': 'mongodb://<user_name>:<user_pwd>@ds161804.mlab.com:61804/photovault',
+         'USER': '<user_name>',
+         'PASSWORD': '<user_pwd>',
      }
  }
 
@@ -153,3 +155,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_CREDENTIALS = True
+# CORS_ORIGIN_WHITELIST = (
+#     'localhost:3030',
+# )
+# CORS_ORIGIN_REGEX_WHITELIST = (
+#     'localhost:3030',
+# )

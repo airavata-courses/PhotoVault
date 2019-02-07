@@ -8,6 +8,7 @@ from cloudinary.api import delete_resources_by_tag, resources_by_tag
 from cloudinary.uploader import upload
 from cloudinary.utils import cloudinary_url
 import settings
+import json
 
 # config
 os.chdir(os.path.join(os.path.dirname(sys.argv[0]), '.'))
@@ -16,6 +17,13 @@ if os.path.exists('settings.py'):
 
 DEFAULT_TAG = "python_sample_basic"
 
+url = sys.argv[1]
+caption = sys.argv[2]
+dateUpload = sys.argv[3]
+location = sys.argv[4]
+userId = sys.argv[5]
+fileName = sys.argv[6]
+print("Details:",url,caption, dateUpload, location, userId, fileName)
 
 def dump_response(response):
     print("Upload response:")
@@ -23,9 +31,9 @@ def dump_response(response):
         print("%s: %s" % (key, response[key]))
 
 
-def upload_files(fileName):
+def upload_files(picture):
     print("--- Upload a local file")
-    response = upload(fileName, tags=DEFAULT_TAG)
+    response = upload(picture, tags=DEFAULT_TAG)
     dump_response(response)
     url, options = cloudinary_url(
         response['public_id'],
@@ -42,17 +50,16 @@ def upload_files(fileName):
     print("")
     return url, url_t
 
-fileName = "lake.jpg"
-url, url_t = upload_files(fileName)
+#url, url_t = upload_files(fileName)
 
-def insertdb(url, url_t, fileName):
-    st = os.stat(fileName)
-    size = (st[6])
-    fileType = fileName.split(".")[-1]
-    name = fileName.split(".")[0]
-    num = random.randint(1, 100000) 
-    fileId = name+str(num)
-    dateUpload = datetime.datetime.now()
+def insertdb(url, caption, dateUpload, location, userId, fileName):
+    #st = os.stat(fileName)
+    #size = (st[6])
+    #fileType = fileName.split(".")[-1]
+    #name = fileName.split(".")[0]
+    #num = random.randint(1, 100000) 
+    #fileId = name+str(num)
+    #dateUpload = datetime.datetime.now()
     host = settings.DATABASES['default']['HOST']
     try: 
         conn = MongoClient(host) 
@@ -63,11 +70,12 @@ def insertdb(url, url_t, fileName):
     # database 
     db = conn.photovault
     photoVaultCollections = db.photovault_photomedia
-    records = photoVaultCollections.insert_one({"fileName": name, "downloadLink": url, "thumbnailLink": url_t, "size": size, "dateUpload": dateUpload}) 
+    records = photoVaultCollections.insert_one({"src": url, "caption": caption, "dateUpload": dateUpload, "location": location, "userId": userId, "fileName": fileName}) 
+    print(records)
     # cursor = photoVaultCollections.find() 
     # for record in cursor: 
     #     print("Record:",record) 
 
-insertdb(url, url_t, fileName)
+insertdb(url, caption, dateUpload, location, userId, fileName)
     
     
