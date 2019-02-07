@@ -3,10 +3,7 @@ import axios from 'axios';
 import classnames from 'classnames';
 import jwt_decode from 'jwt-decode';
 import { Redirect } from 'react-router-dom';
-import {
-    SEARCH_URL,
-    UPLOAD_URL
-} from "../../config/config";
+
 
 class Login extends Component {
 
