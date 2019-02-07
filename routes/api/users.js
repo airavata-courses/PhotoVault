@@ -13,7 +13,7 @@ const validateLoginInput = require('../../validation/login');
 // @route   GET api/users/test
 // @desc    Tests users route
 // @access  Public
-router.get('/test', function (req, res) {
+router.get('/upl', function (req, res) {
   res.json({ msg: 'hello' });
 });
 
@@ -57,6 +57,13 @@ router.post('/register', (req, res) => {
   });
 });
 
+// @route   GET api/users/test
+// @desc    Tests users route
+// // @access  Public
+// router.get('/upload', (req, res) => {
+//   res.json({ msg: 'hello' });
+// });
+
 // @route   POST api/users/login
 // @desc    Login user / Get JWTToken
 // @access  Public
@@ -92,7 +99,7 @@ router.post('/login', (req, res) => {
           else {
 
             //User matched
-            const payload = { id: user.id, lastName: user.lastName };
+            const payload = { id: user.id, email: user.email, lastName: user.lastName };
             jwt.sign(payload, keys.secret, { expiresIn: 3600 }, (err, token) => {
               res.json(
                 {

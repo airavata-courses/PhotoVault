@@ -31,11 +31,11 @@ class Register extends Component {
             password: this.state.password,
             confirmPassword: this.state.confirmPassword
         }
-        //console.log(newUser);
 
         axios.post('api/users/register', newUser)
-            .then(res => console.log(res.data))
+            .then(res => { console.log(res.data); this.props.history.push('/login'); })
             .catch(err => this.setState({ errors: err.response.data }));
+
     }
 
     render() {
