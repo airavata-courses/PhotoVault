@@ -2,6 +2,11 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import classnames from 'classnames';
 import jwt_decode from 'jwt-decode';
+import { Redirect } from 'react-router-dom';
+import {
+    SEARCH_URL,
+    UPLOAD_URL
+} from "../../config/config";
 
 class Login extends Component {
 
@@ -28,9 +33,6 @@ class Login extends Component {
         }
         //console.log(newUser);
 
-        const str = "Abc";
-
-
         axios.post('api/users/login', newUser)
             .then(res => {
                 // Save to localStorage
@@ -46,6 +48,7 @@ class Login extends Component {
                 localStorage.setItem('userEmail', decoded.email);
                 // dispatch(setCurrentUser(decoded));
                 console.log(localStorage.getItem('user'));
+                this.props.history.push('/gallery');
             })
             .catch(err => this.setState({ errors: err.response.data }));
 
