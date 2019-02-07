@@ -15,4 +15,6 @@ class PhotoMedia(models.Model):
 	dateUpload = models.DateTimeField(default = timezone.now)
 	location = models.TextField(default = "null")
 	fileType = models.TextField(default = "null")
-	thumbnailLink = models.TextField(default = "null")
+	thumbnail = models.TextField(default = "null")
+	thumbnailwidth = models.TextField(default = "null")
+	thumbnailHeight = models.TextField(default = "null")

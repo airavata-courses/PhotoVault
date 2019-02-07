@@ -60,6 +60,8 @@ def insertdb(url, caption, dateUpload, location, userId, fileName):
     #num = random.randint(1, 100000) 
     #fileId = name+str(num)
     #dateUpload = datetime.datetime.now()
+    thumbnailWidth = "320"
+    thumbnailHeight = "174"
     host = settings.DATABASES['default']['HOST']
     try: 
         conn = MongoClient(host) 
@@ -70,7 +72,7 @@ def insertdb(url, caption, dateUpload, location, userId, fileName):
     # database 
     db = conn.photovault
     photoVaultCollections = db.photovault_photomedia
-    records = photoVaultCollections.insert_one({"src": url, "caption": caption, "dateUpload": dateUpload, "location": location, "userId": userId, "fileName": fileName}) 
+    records = photoVaultCollections.insert_one({"src": url, "caption": caption, "dateUpload": dateUpload, "location": location, "userId": userId, "fileName": fileName, "thumbnail": url, "thumbnailWidth": thumbnailWidth, "thumbnailHeight": thumbnailHeight}) 
     print(records)
     # cursor = photoVaultCollections.find() 
     # for record in cursor: 
