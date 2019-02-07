@@ -26,7 +26,8 @@ class PhotoGallery extends React.Component {
             date: '',
             location: '',
             searchString: '',
-            photos: []
+            photos: [],
+            currentImage: ''
 
         }
         this.closeLightbox = this.closeLightbox.bind(this);
@@ -56,11 +57,14 @@ class PhotoGallery extends React.Component {
     }
     closeModal() {
         this.setState({
+            caption: '',
+            location: '',
             visible: false
         });
     }
-    downloadPicture() {
-        axios.get(constants.search + '/download?fileId=' + "5c58c2c0351dc4059b62e0bd")
+    downloadPicture(value) {
+        console.log("picture id ", value);
+        axios.get(constants.search + '/download?fileId=' + value)
             .then(res => {
                 console.log(res.data);
                 window.open(res.data.value.downloadLink, "_blank");
@@ -100,8 +104,15 @@ class PhotoGallery extends React.Component {
     openLightbox(event, obj) {
         this.setState({
             currentImage: obj.index,
-            lightboxIsOpen: true,
+            lightboxIsOpen: true
+
         });
+        console.log("ok");
+        axios.get(constants.search + '/download?fileId=' + this.currentImage._id)
+            .then(res => {
+                console.log(res.data);
+                window.open(res.data.value.downloadLink, "_blank");
+            })
     }
     closeLightbox() {
         this.setState({
@@ -149,21 +160,30 @@ class PhotoGallery extends React.Component {
                 </div>
                 <div visible={this.state.gallery}>
                     <Gallery images={this.state.photos}
-                        onClick={this.openLightbox.bind(this)}
+                        onClick={
+                            this.openLightbox.bind(this)
+
+                        }
+
+
+
+
                         columns={5}
                         customControls={[
 
                             <button key="downloadImage"
-                                onClick={this.downloadPicture}>Get Downloadable Link</button>]}
+                                onClick={this.downloadPicture()}>Get Downloadable Link</button>]}
                         padding={3}
                         enableImageSelection={false}
                     />
                     <Lightbox images={this.state.photos}
+
                         onClose={this.closeLightbox}
                         onClickPrev={this.gotoPrevious}
                         onClickNext={this.gotoNext}
                         currentImage={this.state.currentImage}
                         isOpen={this.state.lightboxIsOpen}
+
                     />
                 </div>
 

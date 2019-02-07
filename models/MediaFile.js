@@ -42,7 +42,13 @@ const Photovault_photomedia = new Schema(
     },
     thumbnail: {
       type: String
-    }
+    },
+    thumbnailWidth: {
+      type: String
+    },
+    thumbnailHeight: {
+      type: String
+    },
   },
   { collection: "photovault_photomedia" }
 );
