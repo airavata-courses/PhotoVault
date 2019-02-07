@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const users = require("./routes/api/users");
 const profile = require("./routes/api/profile");
 const search = require("./routes/api/fileOps");
+const uploadImg = require("./routes/api/uploadImg");
 const passport = require("passport");
 const cors = require("cors");
 
@@ -40,6 +41,7 @@ app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 app.use("/api/users", users);
 app.use("/api/profile", profile);
 app.use("/api/fileOps", search);
+app.use("/api/uploadImg", uploadImg);
 
 // Then use it before your routes are set up:
 module.exports = app;
