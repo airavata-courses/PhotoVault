@@ -22,8 +22,8 @@ caption = sys.argv[2]
 dateUpload = sys.argv[3]
 location = sys.argv[4]
 userId = sys.argv[5]
-fileName = sys.argv[6]
-print("Details:",url,caption, dateUpload, location, userId, fileName)
+#fileName = sys.argv[6]
+print("Details:",url,caption, dateUpload, location, userId)
 
 def dump_response(response):
     print("Upload response:")
@@ -52,7 +52,7 @@ def upload_files(picture):
 
 #url, url_t = upload_files(fileName)
 
-def insertdb(url, caption, dateUpload, location, userId, fileName):
+def insertdb(url, caption, dateUpload, location, userId):
     #st = os.stat(fileName)
     #size = (st[6])
     #fileType = fileName.split(".")[-1]
@@ -72,12 +72,12 @@ def insertdb(url, caption, dateUpload, location, userId, fileName):
     # database 
     db = conn.photovault
     photoVaultCollections = db.photovault_photomedia
-    records = photoVaultCollections.insert_one({"src": url, "caption": caption, "dateUpload": dateUpload, "location": location, "userId": userId, "fileName": fileName, "thumbnail": url, "thumbnailWidth": thumbnailWidth, "thumbnailHeight": thumbnailHeight}) 
+    records = photoVaultCollections.insert_one({"src": url, "caption": caption, "dateUpload": dateUpload, "location": location, "userId": userId, "thumbnail": url, "thumbnailWidth": thumbnailWidth, "thumbnailHeight": thumbnailHeight}) 
     print(records)
     # cursor = photoVaultCollections.find() 
     # for record in cursor: 
     #     print("Record:",record) 
 
-insertdb(url, caption, dateUpload, location, userId, fileName)
+insertdb(url, caption, dateUpload, location, userId)
     
     

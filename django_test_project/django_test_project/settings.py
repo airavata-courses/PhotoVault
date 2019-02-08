@@ -28,7 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['149.161.168.207','localhost']
 
-
+CSRF_COOKIE_SECURE = False
 # Application definition
 
 INSTALLED_APPS = [
@@ -112,9 +112,9 @@ DATABASES = {
      'default': {
          'ENGINE': 'djongo',
          'NAME': 'photovault',
-         'HOST': 'mongodb://<user_name>:<user_pwd>@ds161804.mlab.com:61804/photovault',
-         'USER': '<user_name>',
-         'PASSWORD': '<user_pwd>',
+         'HOST': 'mongodb://dev:dev1PhotoVault@ds161804.mlab.com:61804/photovault',
+         'USER': 'dev',
+         'PASSWORD': 'dev1PhotoVault',
      }
  }
 
