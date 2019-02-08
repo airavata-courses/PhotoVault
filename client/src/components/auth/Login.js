@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import classnames from 'classnames';
 import jwt_decode from 'jwt-decode';
-import { Redirect } from 'react-router-dom';
 
 
 class Login extends Component {
@@ -42,6 +41,8 @@ class Login extends Component {
                 const decoded = jwt_decode(token);
                 // Set current user
                 localStorage.setItem('user', decoded.id);
+                localStorage.setItem('firstName', decoded.firstName);
+                localStorage.setItem('lastName', decoded.lastName);
                 localStorage.setItem('userEmail', decoded.email);
                 // dispatch(setCurrentUser(decoded));
                 console.log(localStorage.getItem('user'));

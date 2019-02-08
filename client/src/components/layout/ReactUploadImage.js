@@ -1,9 +1,6 @@
 import React from 'react';
 const constants = require('../../config/config');
-
-
 const axios = require("axios");
-const img = "";
 
 class ReactUploadImage extends React.Component {
 
@@ -41,7 +38,7 @@ class ReactUploadImage extends React.Component {
                 },
             })
             .then(res => {
-                if (res.status == 200) {
+                if (res.status === 200) {
                     this.setState({
                         img_url: res.data.secure_url
                     });

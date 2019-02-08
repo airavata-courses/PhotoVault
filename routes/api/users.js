@@ -13,7 +13,7 @@ const validateLoginInput = require('../../validation/login');
 // @route   GET api/users/test
 // @desc    Tests users route
 // @access  Public
-router.get('/upl', function (req, res) {
+router.get('/test', function (req, res) {
   res.json({ msg: 'hello' });
 });
 
@@ -99,7 +99,7 @@ router.post('/login', (req, res) => {
           else {
 
             //User matched
-            const payload = { id: user.id, email: user.email, lastName: user.lastName };
+            const payload = { id: user.id, email: user.email, firstName: user.firstName, lastName: user.lastName };
             jwt.sign(payload, keys.secret, { expiresIn: 3600 }, (err, token) => {
               res.json(
                 {

@@ -5,6 +5,7 @@ import jwt_decode from 'jwt-decode';
 
 import Navbar from './components/layout/Navbar';
 import Landing from './components/layout/Landing';
+import Explore from './components/layout/Explore';
 import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import Gallery from './components/layout/PhotoGallery';
@@ -32,17 +33,25 @@ if (localStorage.jwtToken) {
 }
 
 class App extends Component {
+  constructor() {
+    super();
+
+    localStorage.clear();
+  }
   render() {
     return (
 
       <Router>
+
         <div className="App">
           <Navbar />
           <Route exact path="/" component={Landing} />
 
           <div className="container">
+            <Route exact path="/explore" component={Explore} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
+
             <Route exact path="/gallery" component={Gallery} />
           </div>
         </div>
