@@ -28,5 +28,12 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
+<<<<<<< Updated upstream
   ]
+=======
+  ],
+  "devDependencies": {
+    "electron": "^4.0.4"
+  }
+>>>>>>> Stashed changes
 }
