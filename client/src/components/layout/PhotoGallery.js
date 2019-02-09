@@ -50,9 +50,15 @@ class PhotoGallery extends React.Component {
     }
 
     closeModal() {
+
         this.setState({
-            visible: false
+            visible: false,
+            caption: '',
+            location: '',
+            isPublic: false
+            //selectedFile: ''
         });
+        document.getElementById('file').value = '';
     }
 
     handleChange = name => event => {
@@ -114,6 +120,7 @@ class PhotoGallery extends React.Component {
             currentImage: this.state.currentImage - 1,
         });
     }
+
     gotoNext() {
         this.setState({
             currentImage: this.state.currentImage + 1,
@@ -305,7 +312,7 @@ class PhotoGallery extends React.Component {
 
                             <div className="row">
                                 <div className="col">
-                                    <input align="center" type="file" name="myImage" className="btn" onChange={this.handleselectedFile} />
+                                    <input id='file' align="center" type="file" name="myImage" className="btn" onChange={this.handleselectedFile} />
                                 </div>
                                 <div className="col">
                                     <Checkbox
