@@ -123,7 +123,7 @@ class PhotoGallery extends React.Component {
         data.append('file', this.state.selectedFile)
 
         axios
-            .post(constants.upload, data, {
+            .post(constants.upload + "/api/uploadImg/upload", data, {
                 onUploadProgress: ProgressEvent => {
                     this.setState({
                         loaded: (ProgressEvent.loaded / ProgressEvent.total * 100),
@@ -143,36 +143,41 @@ class PhotoGallery extends React.Component {
                     const feed_post = {
                         endpoint: {
 
-                            src: this.state.img_url,
+                            URL: this.state.img_url,
                             caption: this.state.caption,
                             location: this.state.location,
-                            dateUpload: Date.now().toString(),
+                            date: Date.now().toString(),
                             userId: localStorage.getItem('user'),
-                            accessRights: this.state.isPublic,
-                            thumbnail: this.state.img_url,
-                            thumbnailWidth: 300,
-                            thumbnailHeight: 200
+                            isPublic: this.state.isPublic
+                            // thumbnail: this.state.img_url,
+                            // thumbnailWidth: 300,
+                            // thumbnailHeight: 200
                         },
                         service: "uploadService"
                     }
                     console.log("upload json", feed_post);
-                    // axios.post(
-                    //     constants.upload,
-                    //     feed_post)
-                    //     .then(function (response) {
-                    //         console.log(response);
-                    //     })
-                    //     .catch(err => console.log(err));
+                    axios.post(
+                        constants.details,
+                        feed_post)
+                        .then(function (response) {
+                            console.log(response);
+                        })
+                        .catch(err => console.log(err));
 
+                }
+                else {
+                    console.log("error");
                 }
             })
     }
     getPublicImages() {
+        console.log("exploring");
+        axios.get(constants.explore + '/explore/true')
 
-        axios.get(constants.explore + '/explore/Public')
             .then(res => {
                 console.log(res);
                 //this.state.photos = res.data;
+                console.log("exploringhh");
                 for (let i = 0; i < res.data.length; i++) {
                     //console.log(res.data[i]);
                     this.state.photos.push(res.data[i]);
