@@ -13,7 +13,7 @@ const Photovault_photomedia = new Schema(
     fileName: {
       type: String
     },
-    downloadLink: {
+    src: {
       type: String
     },
     filePath: {
@@ -40,7 +40,7 @@ const Photovault_photomedia = new Schema(
     fileType: {
       type: String
     },
-    thumbnailLink: {
+    thumbnail: {
       type: String
     },
     thumbnailWidth: {
