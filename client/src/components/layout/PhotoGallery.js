@@ -63,11 +63,11 @@ class PhotoGallery extends React.Component {
 
         axios.get(constants.search + '/api/fileOps/' + this.state.searchString)
             .then(res => {
-                console.log(res);
-                this.state.photos = res.data.media;
+                console.log(res.data.total);
+                this.state.photos = [];
                 for (let i = 0; i < res.data.total; i++) {
                     this.state.photos.push(res.data.media[i]);
-
+                    console.log(i, " hiiiiiii");
                 }
                 console.log("here", this.state.photos);
 
@@ -81,6 +81,7 @@ class PhotoGallery extends React.Component {
         });
     }
     setGalleryNotEmpty() {
+        this.forceUpdate();
         this.setState({
             gallery: false
         });
@@ -89,7 +90,7 @@ class PhotoGallery extends React.Component {
         this.closeModal();
 
     }
-    openLightbox(event, obj) {
+    openLightbox(obj) {
         this.setState({
             currentImage: obj.index,
             lightboxIsOpen: true
@@ -183,6 +184,27 @@ class PhotoGallery extends React.Component {
                     this.state.photos.push(res.data[i]);
                     console.log(this.state.photos[i]);
                 }
+                //this.setState({ state: this.state });
+                this.forceUpdate();
+                this.setGalleryNotEmpty();
+            })
+            .catch(err => console.log(err));
+    }
+    getMyGallery() {
+        console.log("my gallery");
+        axios.get(constants.explore + '/api/fileOps')
+
+            .then(res => {
+                console.log(res);
+                //this.state.photos = res.data;
+                console.log("gallery");
+                for (let i = 0; i < res.data.length; i++) {
+                    //console.log(res.data[i]);
+                    this.state.photos.push(res.data[i]);
+                    console.log(this.state.photos[i]);
+                }
+                //this.setState({ state: this.state });
+                this.forceUpdate();
                 this.setGalleryNotEmpty();
             })
             .catch(err => console.log(err));
@@ -201,7 +223,7 @@ class PhotoGallery extends React.Component {
                         </button>
                     </div>
                     <div className="col">
-                        <button type="button" class="btn btn-outline-primary btn-block ">My Gallery</button>
+                        <button type="button" class="btn btn-outline-primary btn-block " onClick={() => this.getMyGallery()}>My Gallery</button>
                     </div>
                 </div>
                 <h4></h4>
@@ -228,29 +250,29 @@ class PhotoGallery extends React.Component {
                     </div>
                 </div>
                 <h4></h4>
-                <div visible={this.state.gallery}>
-                    <Gallery images={this.state.photos}
-                        onClick={
-                            this.openLightbox.bind(this)
-                        }
+                {/* <div visible={this.state.gallery}> */}
+                <Gallery images={this.state.photos}
+                    onClick={
+                        this.openLightbox.bind(this)
+                    }
 
-                        columns={5}
-                        customControls={[]
-                        }
-                        padding={3}
-                        preloadImageDa
-                        enableImageSelection={false}
-                    />
-                    {<Lightbox images={this.state.photos}
+                    columns={5}
+                    customControls={[]
+                    }
+                    padding={3}
 
-                        onClose={this.closeLightbox}
-                        onClickPrev={this.gotoPrevious}
-                        onClickNext={this.gotoNext}
-                        currentImage={this.state.currentImage}
-                        isOpen={this.state.lightboxIsOpen}
+                    enableImageSelection={false}
+                />
+                {<Lightbox images={this.state.photos}
 
-                    />}
-                </div>
+                    onClose={this.closeLightbox}
+                    onClickPrev={this.gotoPrevious}
+                    onClickNext={this.gotoNext}
+                    currentImage={this.state.currentImage}
+                    isOpen={this.state.lightboxIsOpen}
+
+                />}
+                {/* </div> */}
 
                 <Modal visible={this.state.visible} width="600" height="350" effect="fadeInUp" onClickAway={() => this.closeModal()}>
                     <div>
