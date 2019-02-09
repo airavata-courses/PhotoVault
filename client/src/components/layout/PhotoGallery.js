@@ -177,7 +177,7 @@ class PhotoGallery extends React.Component {
 
             .then(res => {
                 console.log(res);
-                //this.state.photos = res.data;
+                this.state.photos = [];
                 console.log("exploringhh");
                 for (let i = 0; i < res.data.length; i++) {
                     //console.log(res.data[i]);
