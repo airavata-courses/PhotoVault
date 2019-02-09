@@ -248,10 +248,10 @@ class PhotoGallery extends React.Component {
                             }}
                         /></div>
                     <div className="col">
-                        <Fab color="primary" aria-label="Add" >
+                        <Fab color="primary" aria-label="Add" onClick={() => this.openModal()} >
 
                             <AddIcon
-                                onClick={() => this.openModal()}
+
                             />
                         </Fab>
                     </div>
