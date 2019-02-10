@@ -19,8 +19,8 @@ const Photovault_photomedia = new Schema(
     filePath: {
       type: String
     },
-    accessRights: {
-      type: String
+    isPublic: {
+      type: Boolean
     },
     caption: {
       type: String
@@ -48,7 +48,7 @@ const Photovault_photomedia = new Schema(
     },
     thumbnailHeight: {
       type: String
-    },
+    }
   },
   { collection: "photovault_photomedia" }
 );

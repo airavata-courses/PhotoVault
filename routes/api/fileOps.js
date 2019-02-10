@@ -18,11 +18,20 @@ router.get(
   "/:searchString",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header(
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept"
+    );
+    res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
+
     // res.header("Access-Control-Allow-Origin", "*");
     // res.header(
     //   "Access-Control-Allow-Headers",
     //   "Origin, X-Requested-With, Content-Type, Accept"
     // );
+    res.header("Access-Control-Allow-Origin", "*");
+
     // console.log(
     //   "Hello, this is your search string = ",
     //   req.params.searchString
@@ -33,75 +42,75 @@ router.get(
     var page = parseInt(req.body.page) || 0;
     var limit = parseInt(req.body.limit) || 12;
 
-    var query = {
-      fileName: {
-        $regex: new RegExp(req.params.searchString, "i")
-      }
-    };
     // var query = {
-    //   $or: [
-    //     {
-    //       $and: [
-    //         {
-    //           fileName: {
-    //             $regex: new RegExp(req.params.searchString, "i")
-    //           }
-    //         },
-    //         {
-    //           userId: req.user.id
-    //         }
-    //       ]
-    //     },
-    //     {
-    //       $and: [
-    //         {
-    //           userId: req.user.id
-    //         },
-    //         {
-    //           filePath: {
-    //             $regex: new RegExp(req.params.searchString, "i")
-    //           }
-    //         }
-    //       ]
-    //     },
-    //     {
-    //       $and: [
-    //         {
-    //           caption: {
-    //             $regex: new RegExp(req.params.searchString, "i")
-    //           }
-    //         },
-    //         {
-    //           userId: req.user.id
-    //         }
-    //       ]
-    //     },
-    //     {
-    //       $and: [
-    //         {
-    //           hashtag: {
-    //             $regex: new RegExp(req.params.searchString, "i")
-    //           }
-    //         },
-    //         {
-    //           userId: req.user.id
-    //         }
-    //       ]
-    //     },
-    //     {
-    //       $and: [
-    //         {
-    //           location: {
-    //             $regex: new RegExp(req.params.searchString, "i")
-    //           }
-    //         },
-    //         {
-    //           userId: req.user.id
-    //         }
-    //       ]
-    //     }
-    //   ]
+    //   fileName: {
+    //     $regex: new RegExp(req.params.searchString, "i")
+    //   }
     // };
+    var query = {
+      $or: [
+        // {
+        //   $and: [
+        //     {
+        //       fileName: {
+        //         $regex: new RegExp(req.params.searchString, "i")
+        //       }
+        //     },
+        //     {
+        //       userId: req.user.id
+        //     }
+        //   ]
+        // },
+        // {
+        //   $and: [
+        //     {
+        //       userId: req.user.id
+        //     },
+        //     {
+        //       filePath: {
+        //         $regex: new RegExp(req.params.searchString, "i")
+        //       }
+        //     }
+        //   ]
+        // },
+        {
+          $and: [
+            {
+              caption: {
+                $regex: new RegExp(req.params.searchString, "i")
+              }
+            },
+            {
+              userId: req.user.id
+            }
+          ]
+        },
+        // {
+        //   $and: [
+        //     {
+        //       hashtag: {
+        //         $regex: new RegExp(req.params.searchString, "i")
+        //       }
+        //     },
+        //     {
+        //       userId: req.user.id
+        //     }
+        //   ]
+        // },
+        {
+          $and: [
+            {
+              location: {
+                $regex: new RegExp(req.params.searchString, "i")
+              }
+            },
+            {
+              userId: req.user.id
+            }
+          ]
+        }
+      ]
+    };
 
     MediaFile.find(query)
       .sort({
@@ -178,6 +187,31 @@ router.delete(
           })
         )
     );
+  }
+);
+
+// @route   GET api/recent/:userId
+// @desc    Get recently uploaded images based on user id
+// @access  Private
+router.get(
+  "/recent/:userId",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    console.log("userID = ", req.params.userId);
+    var query = {
+      userId: {
+        $regex: new RegExp(req.params.userId, "i")
+      }
+    };
+
+    MediaFile.find(query).exec((err, doc) => {
+      if (err) {
+        return res.json(err);
+      }
+      return res.json({
+        media: doc
+      });
+    });
   }
 );
 

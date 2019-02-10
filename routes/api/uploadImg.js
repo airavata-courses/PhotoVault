@@ -40,7 +40,7 @@ router.post(
     // console.log(req.files.file.path);
     console.log("Upload HIT");
     img_path = req.files.file.path;
-
+    console.log("image path = ", img_path);
     cloudinary.v2.uploader.upload(img_path, function(error, result) {
       if (error) {
         return res.send(error);
