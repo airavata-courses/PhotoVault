@@ -38,6 +38,13 @@ class App extends Component {
     localStorage.clear();
   }
   render() {
+    const PrivateRoute = () => (
+      (
+        localStorage.getItem('user') === null
+          ? <Route exact path="/gallery" component={Login} />
+          : <Route exact path="/gallery" component={Gallery} />
+      )
+    )
     return (
 
       <Router>
@@ -50,7 +57,7 @@ class App extends Component {
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
 
-            <Route exact path="/gallery" component={Gallery} />
+            <PrivateRoute exact path="/gallery" component={Gallery} />
           </div>
         </div>
       </Router>
