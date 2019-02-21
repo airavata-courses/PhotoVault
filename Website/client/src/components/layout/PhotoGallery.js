@@ -35,28 +35,31 @@ class PhotoGallery extends React.Component {
   }
 
   onChange = name => event => {
-    console.log(name);
+    console.log(event.target.value);
     this.setState({ [name]: event.target.value });
+    console.log(this.state);
   };
 
   openModal() {
     this.setState({
-      visible: true
+      visible: true,
+      caption: '',
+      location: '',
+      isPublic: false
     });
   }
 
   closeModal() {
     this.setState({
-      visible: false,
-      caption: '',
-      location: '',
-      isPublic: false
+      visible: false
+
       //selectedFile: ''
     });
     document.getElementById('file').value = '';
   }
 
   handleChange = name => event => {
+    console.log(event.target.checked);
     this.setState({ [name]: event.target.checked });
   };
 
@@ -64,6 +67,7 @@ class PhotoGallery extends React.Component {
     axios
       .get(constants.search + '/api/fileOps/' + this.state.searchString)
       .then(res => {
+        console.log(res.data.total);
         console.log(res.data.total);
         this.state.photos = [];
         for (let i = 0; i < res.data.total; i++) {
