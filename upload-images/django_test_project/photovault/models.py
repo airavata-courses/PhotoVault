@@ -18,3 +18,4 @@ class PhotoMedia(models.Model):
 	thumbnail = models.TextField(default = "null")
 	thumbnailwidth = models.TextField(default = "null")
 	thumbnailHeight = models.TextField(default = "null")
+	isPublic = models.TextField(default = "null")

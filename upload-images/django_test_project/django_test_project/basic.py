@@ -19,11 +19,11 @@ DEFAULT_TAG = "python_sample_basic"
 
 url = sys.argv[1]
 caption = sys.argv[2]
-dateUpload = sys.argv[3]
+#dateUpload = sys.argv[3]
 location = sys.argv[4]
 userId = sys.argv[5]
 isPublic = sys.argv[6]
-print("Details:",url,caption, dateUpload, location, userId, isPublic)
+print("Details:",url,caption, location, userId, isPublic)
 
 def dump_response(response):
     print("Upload response:")
@@ -52,15 +52,19 @@ def upload_files(picture):
 
 #url, url_t = upload_files(fileName)
 
-def insertdb(url, caption, dateUpload, location, userId, isPublic):
+def insertdb(url, caption, location, userId, isPublic):
     #st = os.stat(fileName)
     #size = (st[6])
     #fileType = fileName.split(".")[-1]
     #name = fileName.split(".")[0]
     #num = random.randint(1, 100000) 
     #fileId = name+str(num)
-    #dateUpload = datetime.datetime.now()
-    isPublic = bool(isPublic)
+    dateUpload = datetime.datetime.now()
+    #isPublic = bool(isPublic)
+    if isPublic == "false" or isPublic == "False":
+        isPublic = False 
+    else:
+        isPublic = True 
     thumbnailWidth = "320"
     thumbnailHeight = "174"
     host = settings.DATABASES['default']['HOST']
@@ -69,13 +73,12 @@ def insertdb(url, caption, dateUpload, location, userId, isPublic):
         print("Connected successfully!!!") 
     except:   
         print("Could not connect to MongoDB") 
-  
     # database 
     db = conn.photovault
     photoVaultCollections = db.photovault_photomedia
     records = photoVaultCollections.insert_one({"src": url, "caption": caption, "dateUpload": dateUpload, "location": location, "userId": userId, "isPublic": isPublic, "thumbnail": url, "thumbnailWidth": thumbnailWidth, "thumbnailHeight": thumbnailHeight}) 
     print(records)
 
-insertdb(url, caption, dateUpload, location, userId, isPublic)
+insertdb(url, caption, location, userId, isPublic)
     
     
