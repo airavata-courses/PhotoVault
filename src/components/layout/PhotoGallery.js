@@ -146,6 +146,7 @@ class PhotoGallery extends React.Component {
             },
             service: 'uploadService'
           };
+
           console.log('upload json', feed_post);
           axios
             .post(constants.details, feed_post)
