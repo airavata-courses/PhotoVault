@@ -315,7 +315,6 @@ class PhotoGallery extends React.Component {
                   Make Public
                 </div>
               </div>
-
               <div className="row">
                 <div className="col">
                   <button
