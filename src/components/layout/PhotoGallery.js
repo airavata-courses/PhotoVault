@@ -35,9 +35,7 @@ class PhotoGallery extends React.Component {
   }
 
   onChange = name => event => {
-    console.log(event.target.value);
     this.setState({ [name]: event.target.value });
-    console.log(this.state);
   };
 
   openModal() {
@@ -52,8 +50,6 @@ class PhotoGallery extends React.Component {
   closeModal() {
     this.setState({
       visible: false
-
-      //selectedFile: ''
     });
     document.getElementById('file').value = '';
   }
@@ -67,15 +63,10 @@ class PhotoGallery extends React.Component {
     axios
       .get(constants.search + '/api/fileOps/' + this.state.searchString)
       .then(res => {
-        console.log(res.data.total);
-        console.log(res.data.total);
         this.state.photos = [];
         for (let i = 0; i < res.data.total; i++) {
           this.state.photos.push(res.data.media[i]);
-          console.log(i, ' hiiiiiii');
         }
-        console.log('here', this.state.photos);
-
         this.setGalleryNotEmpty();
       })
       .catch(err => console.log(err));
@@ -141,7 +132,6 @@ class PhotoGallery extends React.Component {
             img_url: res.data.secure_url
           });
           console.log(this.state.img_url);
-
           alert('Picture Successfully Uploaded');
           this.closeModal();
 
@@ -153,9 +143,6 @@ class PhotoGallery extends React.Component {
               date: Date.now().toString(),
               userId: localStorage.getItem('user'),
               isPublic: this.state.isPublic
-              // thumbnail: this.state.img_url,
-              // thumbnailWidth: 300,
-              // thumbnailHeight: 200
             },
             service: 'uploadService'
           };
@@ -172,27 +159,22 @@ class PhotoGallery extends React.Component {
       });
   };
   getPublicImages() {
-    console.log('exploring');
     axios
       .get(constants.explore + '/explore/true')
 
       .then(res => {
         console.log(res);
         this.state.photos = [];
-        console.log('exploringhh');
         for (let i = 0; i < res.data.length; i++) {
-          //console.log(res.data[i]);
           this.state.photos.push(res.data[i]);
           console.log(this.state.photos[i]);
         }
-        //this.setState({ state: this.state });
         this.forceUpdate();
         this.setGalleryNotEmpty();
       })
       .catch(err => console.log(err));
   }
   getMyGallery() {
-    console.log('my gallery');
     axios
       .get(
         constants.search + '/api/fileOps/recent/' + localStorage.getItem('user')
@@ -200,16 +182,10 @@ class PhotoGallery extends React.Component {
 
       .then(res => {
         console.log(res);
-        //this.state.photos = res.data;
         this.state.photos = [];
-        console.log('gallery');
         for (let i = 0; i < res.data.media.length; i++) {
-          //console.log(res.data[i]);
           this.state.photos.push(res.data.media[i]);
-          //console.log(this.state.photos[i]);
         }
-        //this.setState({ state: this.state });
-        //this.forceUpdate();
         this.setGalleryNotEmpty();
       })
       .catch(err => console.log(err));
@@ -265,7 +241,7 @@ class PhotoGallery extends React.Component {
           </div>
         </div>
         <h4 />
-        {/* <div visible={this.state.gallery}> */}
+
         <Gallery
           images={this.state.photos}
           onClick={this.openLightbox.bind(this)}
