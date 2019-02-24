@@ -53,16 +53,15 @@ class Login extends Component {
 
   render() {
     const errors = this.state.errors;
-
     return (
       <div>
         <div className="login">
           <div className="container">
             <div className="row">
               <div className="col-md-8 m-auto">
-                <h1 className="display-4 text-center">Log In</h1>
+                <h1 className="display-4 text-center">Log In --test</h1>
                 <p className="lead text-center">
-                  Sign in to your PhotoVault accountA
+                  Sign in to your PhotoVault account
                 </p>
 
                 <form noValidate onSubmit={this.onSubmit}>
