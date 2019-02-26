@@ -61,7 +61,7 @@ class Login extends Component {
               <div className="col-md-8 m-auto">
                 <h1 className="display-4 text-center">Log In --test18</h1>
                 <p className="lead text-center">
-                  Sign in to your PhotoVault2 account
+                  Sign in to your PhotoVault3 account
                 </p>
 
                 <form noValidate onSubmit={this.onSubmit}>
