@@ -26,7 +26,7 @@ SECRET_KEY = '5o7xs#_rneq$%u_9l+vg&$w7@3gn)8zq0(vg8u94^u2ts-iw@@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['149.161.168.207','localhost']
+ALLOWED_HOSTS = ['149.161.168.207','localhost','149.165.156.42']
 
 CSRF_COOKIE_SECURE = False
 # Application definition
@@ -113,9 +113,9 @@ DATABASES = {
      'default': {
          'ENGINE': 'djongo',
          'NAME': 'photovault',
-         'HOST': 'mongodb://<mlab_user>:<mlab_pwd>@ds161804.mlab.com:61804/photovault',
-         'USER': '<mlab_user>',
-         'PASSWORD': '<mlab_pwd>',
+         'HOST': 'mongodb://dev:dev1PhotoVault@ds161804.mlab.com:61804/photovault',
+         'USER': 'dev',
+         'PASSWORD': 'dev1PhotoVault',
      }
  }
 
