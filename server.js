@@ -24,9 +24,11 @@ const whitelist = ['http://149.165.156.42', 'http://localhost'];
 const corsOptions = {
   origin: function(origin, callback) {
     console.log(origin);
+    console.log('origin if');
     if (whitelist.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
+      console.log('origin else');
       callback(new Error('Not allowed by CORS'));
     }
   },
