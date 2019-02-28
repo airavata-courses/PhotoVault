@@ -1,6 +1,6 @@
 const AUTH_URL = 'http://149.165.156.42:5000';
 const SEARCH_URL = 'http://149.165.156.42:5000';
-const EXPLORE_URL = 'http://149.165.156.42:8080';
+const EXPLORE_URL = 'http://149.165.156.42:6060';
 const UPLOAD_URL = 'http://149.165.156.42:5000';
 const PICTURE_DET_URL = 'http://149.165.156.42:8000';
 module.exports = {
