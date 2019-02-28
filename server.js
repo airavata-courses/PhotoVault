@@ -20,7 +20,7 @@ const app = express();
 // app.use(cors({ origin: '*' }));
 //app.use(cors());
 
-const whitelist = ['http://149.165.156.42', 'http://localhost'];
+const whitelist = ['http://149.165.156.42:3000', 'http://localhost:3000'];
 const corsOptions = {
   origin: function(origin, callback) {
     console.log(origin);
