@@ -17,6 +17,7 @@ mongoose
   .catch(err => console.log(err));
 
 const app = express();
+app.use(cors({ origin: '*' }));
 
 app.get('/', (req, res) => res.send('Hello World!!!!!!!!!!!'));
 app.get('/test', (req, res) => res.json({ msg: 'hello' }));
@@ -35,8 +36,8 @@ require('./config/passport')(passport);
 // parse application/json
 app.use(bodyParser.json());
 // app.use(cors());
-app.use(cors({ origin: '*' }));
-app.options('*', cors());
+
+//app.options('*', cors());
 
 // app.use(function(req, res, next) {
 //   res.header('Access-Control-Allow-Origin', '*');
