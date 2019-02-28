@@ -17,8 +17,8 @@ mongoose
   .catch(err => console.log(err));
 
 const app = express();
-app.use(cors({ origin: '*' }));
-
+// app.use(cors({ origin: '*' }));
+app.use(cors());
 app.get('/', (req, res) => res.send('Hello World!!!!!!!!!!!'));
 app.get('/test', (req, res) => res.json({ msg: 'hello' }));
 //Use routes
