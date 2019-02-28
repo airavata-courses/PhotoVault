@@ -17,27 +17,27 @@ mongoose
   .catch(err => console.log(err));
 
 const app = express();
-// app.use(cors({ origin: '*' }));
-//app.use(cors());
+app.use(cors({ origin: '*' }));
+app.use(cors());
 
-const whitelist = ['http://149.165.156.42:3000', 'http://localhost:3000'];
-const corsOptions = {
-  origin: function(origin, callback) {
-    console.log(origin);
-    console.log('origin if');
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      console.log('origin else');
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true,
-  enablePreflight: true
-};
+// const whitelist = ['http://149.165.156.42:3000', 'http://localhost:3000'];
+// const corsOptions = {
+//   origin: function(origin, callback) {
+//     console.log(origin);
+//     console.log('origin if');
+//     if (whitelist.indexOf(origin) !== -1) {
+//       callback(null, true);
+//     } else {
+//       console.log('origin else');
+//       callback(new Error('Not allowed by CORS'));
+//     }
+//   },
+//   credentials: true,
+//   enablePreflight: true
+// };
 
-app.use(cors(corsOptions));
-app.options('*', cors(corsOptions));
+// app.use(cors(corsOptions));
+//app.options('*', cors(corsOptions));
 
 app.get('/', (req, res) => res.send('Hello World!!!!!!!!!!!'));
 app.get('/test', (req, res) => res.json({ msg: 'hello' }));
