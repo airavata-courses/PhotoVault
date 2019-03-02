@@ -13,7 +13,7 @@ const validateLoginInput = require("../../validation/login");
 //@desc Route req to different microservices
 //@access Public
 
-router.get("/test", (req.res) => {
+router.get("/test", (req,res) => {
 	res.json({msg: 'hello'});
 });
 
