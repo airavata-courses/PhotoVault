@@ -1,52 +1,30 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const User = require("../../models/User");
-const keys = require("../../config/keys");
-const passport = require("passport");
-const MediaFile = require("../../models/MediaFile");
-
-//Load Validation
-const validateRegisterInput = require("../../validation/register");
-const validateLoginInput = require("../../validation/login");
+const User = require('../../models/User');
+const passport = require('passport');
+const MediaFile = require('../../models/MediaFile');
 
 // @route   GET api/fileOps/:searchString
 // @desc    Search an image based on searchString
 // @access  Private
 router.get(
-  "/:searchString",
-  passport.authenticate("jwt", { session: false }),
+  '/:searchString',
+  passport.authenticate('jwt', { session: false }),
   (req, res) => {
-    res.header("Access-Control-Allow-Origin", "*");
+    res.header('Access-Control-Allow-Origin', '*');
     res.header(
-      "Access-Control-Allow-Headers",
-      "Origin, X-Requested-With, Content-Type, Accept"
+      'Access-Control-Allow-Headers',
+      'Origin, X-Requested-With, Content-Type, Accept'
     );
-    res.header("Access-Control-Allow-Methods", "GET,PUT,POST,DELETE");
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
 
-    // res.header("Access-Control-Allow-Origin", "*");
-    // res.header(
-    //   "Access-Control-Allow-Headers",
-    //   "Origin, X-Requested-With, Content-Type, Accept"
-    // );
-    res.header("Access-Control-Allow-Origin", "*");
+    res.header('Access-Control-Allow-Origin', '*');
 
-    // console.log(
-    //   "Hello, this is your search string = ",
-    //   req.params.searchString
-    // );
-
-    console.log("User id = ", req.user.id);
+    console.log('User id = ', req.user.id);
     const errors = {};
     var page = parseInt(req.body.page) || 0;
     var limit = parseInt(req.body.limit) || 12;
 
-    // var query = {
-    //   fileName: {
-    //     $regex: new RegExp(req.params.searchString, "i")
-    //   }
-    // };
     var query = {
       $or: [
         // {
@@ -77,7 +55,7 @@ router.get(
           $and: [
             {
               caption: {
-                $regex: new RegExp(req.params.searchString, "i")
+                $regex: new RegExp(req.params.searchString, 'i')
               }
             },
             {
@@ -101,7 +79,7 @@ router.get(
           $and: [
             {
               location: {
-                $regex: new RegExp(req.params.searchString, "i")
+                $regex: new RegExp(req.params.searchString, 'i')
               }
             },
             {
@@ -162,8 +140,8 @@ router.get(
 // @desc    Delete image based on id
 // @access  Private
 router.delete(
-  "/:id",
-  passport.authenticate("jwt", { session: false }),
+  '/:id',
+  passport.authenticate('jwt', { session: false }),
   (req, res) => {
     User.findOne({ user: req.user.id }).then(
       MediaFile.findById(req.params.id)
@@ -172,7 +150,7 @@ router.delete(
           if (MediaFile.userId.toString() != req.user.id) {
             return res
               .status(401)
-              .json({ notAuthorized: "User not authorized." });
+              .json({ notAuthorized: 'User not authorized.' });
           }
           // Delete
           MediaFile.remove().then(() =>
@@ -183,7 +161,7 @@ router.delete(
         })
         .catch(err =>
           res.status(404).json({
-            fileNotFound: "No file found"
+            fileNotFound: 'No file found'
           })
         )
     );
@@ -194,13 +172,13 @@ router.delete(
 // @desc    Get recently uploaded images based on user id
 // @access  Private
 router.get(
-  "/recent/:userId",
-  passport.authenticate("jwt", { session: false }),
+  '/recent/:userId',
+  passport.authenticate('jwt', { session: false }),
   (req, res) => {
-    console.log("userID = ", req.params.userId);
+    console.log('userID = ', req.params.userId);
     var query = {
       userId: {
-        $regex: new RegExp(req.params.userId, "i")
+        $regex: new RegExp(req.params.userId, 'i')
       }
     };
 
