@@ -4,6 +4,9 @@ const bodyParser = require("body-parser");
 const users = require("./routes/api/users");
 const search = require("./routes/api/fileOps");
 const uploadImg = require("./routes/api/uploadImg");
+const kafkaProducer = require("./routes/api/kafkaProducer");
+const kafkaConsumer = require("./routes/api/kafkaConsumer");
+const apiGateway = require("./routes/api/apiGateway");
 const passport = require("passport");
 const cors = require("cors");
 
@@ -35,7 +38,7 @@ require("./config/passport")(passport);
 // parse application/json
 app.use(bodyParser.json());
 // app.use(cors());
-app.use(cors({ origin: "http://localhost:3000" }));
+app.use(cors({ origin: "http://149.165.156.42:3000" }));
 
 // app.use(function(req, res, next) {
 //   res.header("Access-Control-Allow-Origin", "*");
@@ -51,6 +54,9 @@ app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 app.use("/api/users", users);
 app.use("/api/fileOps", search);
 app.use("/api/uploadImg", uploadImg);
+app.use("/api/kafkaProducer", kafkaProducer);
+app.use("/api/kafkaConsumer", kafkaConsumer);
+app.use("/api/apiGateway", apiGateway);
 
 // Then use it before your routes are set up:
 
