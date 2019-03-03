@@ -26,7 +26,7 @@ SECRET_KEY = '5o7xs#_rneq$%u_9l+vg&$w7@3gn)8zq0(vg8u94^u2ts-iw@@'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['149.161.168.207','localhost','149.165.156.42']
+ALLOWED_HOSTS = ['149.161.168.207','localhost','149.165.156.42','149.165.170.5']
 
 CSRF_COOKIE_SECURE = False
 # Application definition
