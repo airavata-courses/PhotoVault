@@ -24,7 +24,8 @@ class Login extends Component {
 
     const newUser = {
       email: this.state.email,
-      password: this.state.password
+      password: this.state.password,
+      key: 'login'
     };
     //console.log(newUser);
 

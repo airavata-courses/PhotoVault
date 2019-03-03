@@ -30,7 +30,8 @@ class Register extends Component {
       lastName: this.state.lastName,
       email: this.state.email,
       password: this.state.password,
-      confirmPassword: this.state.confirmPassword
+      confirmPassword: this.state.confirmPassword,
+      key: 'register'
     };
 
     axios

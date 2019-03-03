@@ -160,8 +160,12 @@ class PhotoGallery extends React.Component {
       });
   };
   getPublicImages() {
+    const explore = {
+      isPublic: 'true',
+      key: 'register'
+    };
     axios
-      .get(constants.explore + '/explore/true')
+      .get(constants.explore + '/explore', explore)
 
       .then(res => {
         console.log(res);
