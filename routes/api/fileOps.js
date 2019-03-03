@@ -9,7 +9,6 @@ const MediaFile = require('../../models/MediaFile');
 // @access  Private
 router.get(
   '/:searchString',
-  passport.authenticate('jwt', { session: false }),
   (req, res) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header(
