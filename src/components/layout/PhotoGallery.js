@@ -165,7 +165,7 @@ class PhotoGallery extends React.Component {
       key: 'explore'
     };
     axios
-      .get(constants.explore, explore)
+      .post(constants.explore, explore)
 
       .then(res => {
         console.log(res);
