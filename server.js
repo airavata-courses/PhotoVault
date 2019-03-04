@@ -48,7 +48,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //	})
 //})
 
-app.get("/", (request, response) => {
+app.post("/", (request, response) => {
 	console.log("body = ", request.body);
 	key = request.body.key;
 	if (key === "login") {
@@ -177,7 +177,7 @@ app.get("/", (request, response) => {
 			  console.log("isPublic");
 				
 			  var options = {
-				  hostname: "exploreService.service.consul",
+				  hostname: "149.165.168.210",
 				  port: 6060,
 				  path: "/explore/true",
 				  method: "GET",
