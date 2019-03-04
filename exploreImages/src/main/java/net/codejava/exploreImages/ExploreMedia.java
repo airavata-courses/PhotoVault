@@ -49,6 +49,13 @@ public class ExploreMedia {
 ////		return json;
 //	}
 	
+		@GetMapping("/health")
+		@CrossOrigin
+		public String getHealth(){
+			return "yo its working";
+		}
+
+
 	@GetMapping("/explore/{isPublic}")
 	@CrossOrigin
 	public String explore1(@PathVariable("isPublic") Boolean isPublic) 
