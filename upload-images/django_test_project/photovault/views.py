@@ -16,16 +16,18 @@ class Object(CsrfExemptMixin, APIView):
         
 @csrf_exempt       
 def home(request):
-	body = json.loads(request.body)
-	url = str(body["endpoint"]["URL"])
-	caption = body["endpoint"]["caption"]
-	dateUpload = body["endpoint"]["date"]
-	location = body["endpoint"]["location"]
-	userId = body["endpoint"]["userId"]
-	isPublic = body["endpoint"]["isPublic"]
-	isPublic = str(isPublic)
-	#fileName = body["endpoint"]["fileName"]
-	current_dir = os.getcwd()
-	directory = current_dir+"/django_test_project/basic.py"
-	subprocess.Popen(["python", directory, url, caption, dateUpload, location, userId, isPublic], close_fds=True)
-	return render(request, 'photovault/home.html')
+    print("req",request.body)
+    body = json.loads(request.body)
+    print(body)
+    url = str(body["endpoint"]["URL"])
+    caption = body["endpoint"]["caption"]
+    dateUpload = body["endpoint"]["date"]
+    location = body["endpoint"]["location"]
+    userId = body["endpoint"]["userId"]
+    isPublic = body["endpoint"]["isPublic"]
+    isPublic = str(isPublic)
+    #fileName = body["endpoint"]["fileName"]
+    current_dir = os.getcwd()
+    directory = current_dir+"/django_test_project/basic.py"
+    subprocess.Popen(["python", directory, url, caption, dateUpload, location, userId, isPublic], close_fds=True)
+    return render(request, 'photovault/home.html')
