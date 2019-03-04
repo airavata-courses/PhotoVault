@@ -6,7 +6,10 @@ const search = require("./routes/api/fileOps");
 const uploadImg = require("./routes/api/uploadImg");
 const apiGateway = require("./routes/api/apiGateway");
 const passport = require("passport");
+const url = require("url");
 const cors = require("cors");
+const http = require("http");
+const axios = require('axios');
 
 //DB connection
 const db = require("./config/keys").mongoURI;
@@ -18,14 +21,245 @@ mongoose
   .catch(err => console.log(err));
 
 const app = express();
+app.use(cors());
+app.use(express.json());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
-app.get("/", (req, res) => res.send("Hello World!!!!!!!!!!!"));
+
+//app.post('/api/users/login', function(req, res) {
+//	console.log(req.body);
+//	axios.post('http://searchService.service.consul:5000/api/users/login', req.body)
+//	.then((response) => {
+//		res.json(response.data);
+//	}).catch((error) => {
+//		console.log("Error: " + error.respose.data)
+//		res.status(error.response.status).send(error.response.data);
+//	})
+//})
+
+//app.get('/api/fileOps/searchString', (req, res) => {
+//	console.log(req.body);
+//	axios.get('http://searchService.service.consul:5000/api/fileOps/searchString')
+//	.then((response)=> {
+//		res.json(response.data);
+//	}).catch((error)=> {
+//		console.log("Error: "+error.response.data)
+//		res.status(error.response.status).send(error.response.data);
+//	})
+//})
+
+app.get("/", (request, response) => {
+	console.log("body = ", request.body);
+	key = request.body.key;
+	if (key === "login") {
+		username = request.body.email;
+		password = request.body.password;
+
+		var options = {
+
+			hostname: "searchService.service.consul",
+			port: 5000,
+			path: "/api/users/login",
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json"
+			}
+		};
+
+		var req = http.request(options, function(res) {
+			console.log("Status: "+ res.statusCode);
+			console.log("Headers: " + JSON.stringify(res.headers));
+			res.setEncoding("utf8");
+			res.on("data", function(body) {
+				console.log("Body: " + body);
+				response.end(body);
+			});
+		});
+
+		req.on("error", function(e) {
+			console.log("problem with request: " + e.message);
+			    });
+
+		//write data to request body
+		var body = JSON.stringify({
+			      email: username,
+			      password: password
+			    });
+
+		req.end(body);
+	
+		  } else if (key === "register") {
+
+			firstName = request.body.firstName;
+			lastName = request.body.lastName;
+
+			username = request.body.email;
+			password = request.body.password;
+			confirmPassword = request.body.confirmPassword;
+
+			  var options = {
+				hostname: "searchService.service.consul",
+				port: 5000,
+				path: "/api/users/register",
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json"
+					}
+				};
+
+			  var req = http.request(options, function(res) {
+				        console.log("Status: " + res.statusCode);
+				        console.log("Headers: " + JSON.stringify(res.headers));
+				        res.setEncoding("utf8");
+				        res.on("data", function(body) {
+						        console.log("Body: " + body);
+						response.end(body);
+						      });
+				      });
+
+			  req.on("error", function(e) {
+				        console.log("problem with request: " + e.message);
+				      });
+			      // write data to request body
+			       var body = JSON.stringify({
+			             email: username,
+			             password: password,
+				     confirmPassword: confirmPassword,
+				     firstName: firstName,
+				     lastName: lastName
+			      });
+			      req.end(body);
+			      
+		  
+		  }// else if (key === "searchString") {
+		//	  searchString = request.body.searchString;
+		//	  userId = request.body.userId;
+		//	  console.log("searchString = " + searchString);
+		//	  console.log("userId = "+ userId);
+
+		//	  var options = {
+		//		hostname: "149.165.156.42",
+		//		port: 5000,
+		//		  path: "/api/fileOps/searchString",
+		//		  method: "GET",
+		//		  gzip: true,
+		//		  headers: {
+		//			  "Constent-Type": "application/json",
+		//			  "Connection": "Keep-Alive"
+		//		  }
+		//	  };
+
+			  
+
+		//	  var req = http.request(options, function(res) {
+				  //console.log("Status: " + res.statusCode);
+				  //console.log("Headers: " + JSON.stringify(res.headers));
+		//	  	res.setEncoding("utf8");
+		//		  res.on("data", function(body) {
+		//			console.log("Body: " , body);
+		//			  response.end(body);
+		//		  });
+		//	  });
+
+		//	  req.on("error", function(e) {
+		//	  	console.log("problem with req: " + e.message);
+		//	  });
+
+			  //write data to req body
+//			  var body = JSON.stringify({
+//				  searchString: searchString,
+//				  userId: userId
+//			  });
+//			  req.end(body);
+	//	  }
+	else if (key === "explore") {
+			  isPublic = request.query.isPublic;
+			  console.log("isPublic");
+				
+			  var options = {
+				  hostname: "exploreService.service.consul",
+				  port: 6060,
+				  path: "/explore/true",
+				  method: "GET",
+				  headers: {
+					"Content-Type": "application/json"
+				  }
+			  };
+
+			  var req = http.request(options, function(res) {
+			  	res.setEncoding("utf8");
+				  res.on("data", function(body) {
+					  response.end(body);
+				  });
+			  });
+
+			  req.on("error", function(e) {
+				  console.log("req error: "+ e);
+			  });
+			  //write data to req body
+			  var body = JSON.stringify({
+				  isPublic: isPublic
+			  });
+			  req.end(body);
+		  } else if (key === "upload") {
+			  //URL = request.body.endpoint.URL;
+			  //caption = request.body.endpoint.caption; 
+			  //date = request.body.endpoint.date; 
+			  //location = request.body.endpoint.location;
+			  //userId = request.body.endpoint.userId;
+			  //isPublic = request.body.endpoint.isPublic;
+			  endpoint = request.body.endpoint;
+			console.log("location: ", request.body.endpoint);
+			
+			  var options = {
+				  hostname: "uploadService.service.consul",
+				  port: 8000,
+				  path: "/",
+				  method: "GET",
+				  headers: {
+					  "Content-Type": "application/json"
+				  }
+			  };
+			  var req = http.request(options, function(res) {
+				console.log("Status: " + res.statusCode);
+				  console.log("Headers: " + JSON.stringify(res.headers));
+				  res.setEncoding("utf8");
+				  res.on("data", function(body) {
+					  //console.log("Body: " + body);
+					  response.end(body);
+				  });
+			  });
+
+			req.on("error", function(e) {
+				console.log("Problem with request: " + e.message);
+			});
+
+			//write data to req body
+			  //console.log("Before stringify");
+			var body = JSON.stringify({
+				//URL: URL,
+				//caption: caption,
+				//date: date,
+				//location: location,
+				//userId: userId,
+				//isPublic: isPublic
+				endpoint: endpoint
+			});
+			  console.log("Body = ", body);
+			  req.end(body);
+			  //res.send(body);
+		  }
+
+
+			  
+			});
+
 app.get("/test", (req, res) => res.json({ msg: "hello" }));
 //Use routes
 
 const port = 5000;
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({ extended: false }));
 
 //Passport middleware
 app.use(passport.initialize());

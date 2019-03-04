@@ -8,7 +8,7 @@ const MediaFile = require('../../models/MediaFile');
 // @desc    Search an image based on searchString
 // @access  Private
 router.get(
-  '/:searchString',
+  '/:searchString', passport.authenticate("jwt", { session: false }),
   (req, res) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header(
