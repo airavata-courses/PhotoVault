@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """
 Django settings for django_test_project project.
 

@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 """django_test_project URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
