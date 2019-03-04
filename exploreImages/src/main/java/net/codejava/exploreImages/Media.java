@@ -111,4 +111,5 @@ public class Media {
 	public void setThumbnailLink(String thumbnailLink) {
 		this.thumbnail = thumbnailLink;
 	}
+	
 }
