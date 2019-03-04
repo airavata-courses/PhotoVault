@@ -9,7 +9,6 @@ const passport = require("passport");
 const url = require("url");
 const cors = require("cors");
 const http = require("http");
-const axios = require('axios');
 
 //DB connection
 const db = require("./config/keys").mongoURI;
