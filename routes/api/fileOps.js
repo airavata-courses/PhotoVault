@@ -4,12 +4,11 @@ const User = require('../../models/User');
 const passport = require('passport');
 const MediaFile = require('../../models/MediaFile');
 
-// @route   GET api/fileOps/:searchString
+// @route   POST api/fileOps/searchString
 // @desc    Search an image based on searchString
 // @access  Private
-router.get(
-  '/:searchString',
-  passport.authenticate('jwt', { session: false }),
+router.post(
+  '/searchString', passport.authenticate("jwt", { session: false}),
   (req, res) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header(
@@ -20,7 +19,8 @@ router.get(
 
     res.header('Access-Control-Allow-Origin', '*');
 
-    console.log('User id = ', req.user.id);
+    console.log('Body = ', req.body);
+	  console.log("Query = ", req.query)
     const errors = {};
     var page = parseInt(req.body.page) || 0;
     var limit = parseInt(req.body.limit) || 12;
@@ -55,11 +55,11 @@ router.get(
           $and: [
             {
               caption: {
-                $regex: new RegExp(req.params.searchString, 'i')
+                $regex: new RegExp(req.body.searchString, 'i')
               }
             },
             {
-              userId: req.user.id
+              userId: req.body.userId
             }
           ]
         },
@@ -79,11 +79,11 @@ router.get(
           $and: [
             {
               location: {
-                $regex: new RegExp(req.params.searchString, 'i')
+                $regex: new RegExp(req.body.searchString, 'i')
               }
             },
             {
-              userId: req.user.id
+              userId: req.body.userId
             }
           ]
         }

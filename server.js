@@ -19,7 +19,8 @@ mongoose
 const app = express();
 app.use(cors({ origin: '*' }));
 app.use(cors());
-
+app.use(bodyParser.json()); 
+app.use(bodyParser.urlencoded({ extended: true }));
 // const whitelist = ['http://149.165.156.42:3000', 'http://localhost:3000'];
 // const corsOptions = {
 //   origin: function(origin, callback) {
@@ -39,7 +40,7 @@ app.use(cors());
 // app.use(cors(corsOptions));
 //app.options('*', cors(corsOptions));
 
-app.get('/', (req, res) => res.send('Hello World!!!!!!!!!!!'));
+app.get('/', (req, res) => res.send('Hello '));
 app.get('/test', (req, res) => res.json({ msg: 'hello' }));
 //Use routes
 
