@@ -142,11 +142,12 @@ class PhotoGallery extends React.Component {
           this.closeModal();
 
           const feed_post = {
+            key: 'upload',
             endpoint: {
               URL: this.state.img_url,
               caption: this.state.caption,
               location: this.state.location,
-              date: Date.now().toString(),
+              //date: Date.now().toString(),
               userId: localStorage.getItem('user'),
               isPublic: this.state.isPublic
             },
@@ -155,7 +156,7 @@ class PhotoGallery extends React.Component {
 
           console.log('upload json', feed_post);
           axios
-            .post(constants.details, feed_post)
+            .post(constants.details + '/', feed_post)
             .then(function(response) {
               console.log(response);
             })
