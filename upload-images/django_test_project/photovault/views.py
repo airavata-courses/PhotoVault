@@ -16,8 +16,6 @@ class Object(CsrfExemptMixin, APIView):
         
 @csrf_exempt       
 def home(request):
-    print("Request",request)
-    print("get",request.GET["URL"])
     #body = json.loads(request.body)
     #url = str(body["endpoint"]["URL"])
     #caption = body["endpoint"]["caption"]
@@ -27,7 +25,6 @@ def home(request):
     #isPublic = body["endpoint"]["isPublic"]
     url = request.GET["URL"]
     caption = request.GET["caption"]
-    #dateUpload = request.GET["date"]
     location = request.GET["location"]
     userId = request.GET["userId"]
     isPublic = request.GET["isPublic"]
