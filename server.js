@@ -95,7 +95,7 @@ app.post("/", (request, response) => {
 
 			username = request.body.email;
 			password = request.body.password;
-			confirmPassword = request.body.confirmPassword;
+			confirmPassword = request.body.confirmPassword; 
 
 			  var options = {
 				hostname: "searchService.service.consul",
@@ -103,7 +103,8 @@ app.post("/", (request, response) => {
 				path: "/api/users/register",
 				method: "POST",
 				headers: {
-					"Content-Type": "application/json"
+					"Content-Type": "application/json",
+
 					}
 				};
 
@@ -131,47 +132,51 @@ app.post("/", (request, response) => {
 			      req.end(body);
 			      
 		  
-		  }// else if (key === "searchString") {
-		//	  searchString = request.body.searchString;
-		//	  userId = request.body.userId;
-		//	  console.log("searchString = " + searchString);
-		//	  console.log("userId = "+ userId);
+		  } else if (key === "searchString") {
+			  //searchString = request.body.searchString;
+			  //userId = request.body.userId;
+			  //console.log("searchString = " + searchString);
+			  //console.log("userId = "+ userId);
 
-		//	  var options = {
-		//		hostname: "149.165.156.42",
-		//		port: 5000,
-		//		  path: "/api/fileOps/searchString",
-		//		  method: "GET",
-		//		  gzip: true,
-		//		  headers: {
-		//			  "Constent-Type": "application/json",
-		//			  "Connection": "Keep-Alive"
-		//		  }
-		//	  };
-
+			  var options = {
+				hostname: "searchService.service.consul",
+				port: 5000,
+				  path: "/api/fileOps/searchString",
+				  method: "POST",
+				  headers: {
+					  "Content-Type": "application/json",
+					  "Authorization": request.body.Authorization
+				  }
+			  };
+//				console.log("after header");
 			  
 
-		//	  var req = http.request(options, function(res) {
-				  //console.log("Status: " + res.statusCode);
-				  //console.log("Headers: " + JSON.stringify(res.headers));
-		//	  	res.setEncoding("utf8");
-		//		  res.on("data", function(body) {
-		//			console.log("Body: " , body);
-		//			  response.end(body);
-		//		  });
-		//	  });
-
-		//	  req.on("error", function(e) {
-		//	  	console.log("problem with req: " + e.message);
-		//	  });
-
+			  var req = http.request(options, function(res) {
+				  console.log("Status: " + res.statusCode);
+				  console.log("Headers: " + JSON.stringify(res.headers));
+			  	res.setEncoding("utf8");
+				  res.on("data", function(body) {
+					console.log("Body: " , body);
+					  response.end(body);
+				  });
+			  });
+				//console.log("Before error");
+			  req.on("error", function(e) {
+			  	
+				  console.log("problem with req: " + e.message);
+				
+			  });
+			  
+			
 			  //write data to req body
-//			  var body = JSON.stringify({
-//				  searchString: searchString,
-//				  userId: userId
-//			  });
-//			  req.end(body);
-	//	  }
+			  var body = JSON.stringify({
+				  searchString: request.body.searchString,
+				  userId: request.body.userId
+			  });
+			  console.log("After body = ", body);
+			  req.end(body);
+			  
+		  }
 	else if (key === "explore") {
 			  isPublic = request.query.isPublic;
 			  console.log("isPublic");
@@ -202,24 +207,26 @@ app.post("/", (request, response) => {
 			  });
 			  req.end(body);
 		  } else if (key === "upload") {
-			  //URL = request.body.endpoint.URL;
-			  //caption = request.body.endpoint.caption; 
-			  //date = request.body.endpoint.date; 
-			  //location = request.body.endpoint.location;
-			  //userId = request.body.endpoint.userId;
-			  //isPublic = request.body.endpoint.isPublic;
-			  endpoint = request.body.endpoint;
-			console.log("location: ", request.body.endpoint);
+			  URL = request.body.endpoint.URL;
+			  caption = request.body.endpoint.caption; 
+			  date = request.body.endpoint.date; 
+			  location = request.body.endpoint.location;
+			  userId = request.body.endpoint.userId;
+			  isPublic = request.body.endpoint.isPublic;
+			  //endpoint = request.body.endpoint;
+			//console.log("location: ", request.body.endpoint);
 			
 			  var options = {
 				  hostname: "uploadService.service.consul",
 				  port: 8000,
-				  path: "/",
+				 path: "/upload/?URL="+URL+"&caption="+caption+"&location="+location+"&userId="+userId+"&isPublic="+isPublic, 
 				  method: "GET",
 				  headers: {
+
 					  "Content-Type": "application/json"
 				  }
 			  };
+			  console.log("path = ", options.path);
 			  var req = http.request(options, function(res) {
 				console.log("Status: " + res.statusCode);
 				  console.log("Headers: " + JSON.stringify(res.headers));
@@ -236,22 +243,18 @@ app.post("/", (request, response) => {
 
 			//write data to req body
 			  //console.log("Before stringify");
-			var body = JSON.stringify({
+			//var body = JSON.stringify({
 				//URL: URL,
 				//caption: caption,
 				//date: date,
 				//location: location,
 				//userId: userId,
 				//isPublic: isPublic
-				endpoint: endpoint
-			});
-			  console.log("Body = ", body);
-			  req.end(body);
-			  //res.send(body);
+			//	endpoint: request.body.endpoint
+			//});
+			  //console.log("Body = ", body);
+			  req.end();
 		  }
-
-
-			  
 			});
 
 app.get("/test", (req, res) => res.json({ msg: "hello" }));
