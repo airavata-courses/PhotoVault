@@ -60,8 +60,14 @@ class PhotoGallery extends React.Component {
   };
 
   getSearchedImages() {
+    const searchObject = {
+      searchString: this.state.searchString,
+      Authorization: localStorage.getItem('jwtToken'),
+      userId: localStorage.getItem('user'),
+      key: 'searchString'
+    };
     axios
-      .get(constants.search + '/api/fileOps/' + this.state.searchString)
+      .post(constants.search, searchObject)
       .then(res => {
         this.state.photos = [];
         for (let i = 0; i < res.data.total; i++) {
