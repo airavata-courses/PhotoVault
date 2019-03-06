@@ -35,7 +35,7 @@ class Register extends Component {
     };
 
     axios
-      .post(constants.auth + '/api/users/register', newUser)
+      .post(constants.auth + '/', newUser)
       .then(res => {
         this.props.history.push('/login');
       })
