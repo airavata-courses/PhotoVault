@@ -19,10 +19,11 @@ DEFAULT_TAG = "python_sample_basic"
 
 url = sys.argv[1]
 caption = sys.argv[2]
-#dateUpload = sys.argv[3]
-location = sys.argv[4]
-userId = sys.argv[5]
-isPublic = sys.argv[6]
+location = sys.argv[3]
+userId = sys.argv[4]
+isPublic = sys.argv[5]
+caption = caption.replace("+", " ")
+location = location.replace("+", " ")
 print("Details:",url,caption, location, userId, isPublic)
 
 def dump_response(response):
@@ -50,7 +51,6 @@ def upload_files(picture):
     print("")
     return url, url_t
 
-#url, url_t = upload_files(fileName)
 
 def insertdb(url, caption, location, userId, isPublic):
     #st = os.stat(fileName)
@@ -60,7 +60,6 @@ def insertdb(url, caption, location, userId, isPublic):
     #num = random.randint(1, 100000) 
     #fileId = name+str(num)
     dateUpload = datetime.datetime.now()
-    #isPublic = bool(isPublic)
     if isPublic == "false" or isPublic == "False":
         isPublic = False 
     else:
