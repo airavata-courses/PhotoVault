@@ -6,6 +6,7 @@ const search = require('./routes/api/fileOps');
 const uploadImg = require('./routes/api/uploadImg');
 const passport = require('passport');
 const cors = require('cors');
+var consul = require("consul")();
 
 //DB connection
 const db = require('./config/keys').mongoURI;
@@ -78,3 +79,17 @@ app.use('/api/uploadImg', uploadImg);
 // Then use it before your routes are set up:
 
 module.exports = app;
+console.log("testing");
+let details = {
+	name: 'searchService',
+	address : '',
+	check:{
+		http : 'http://localhost:5000',			
+		interval: '10s',
+		deregistercriticalserviceafter:'1m'
+	}
+};
+console.log(details);
+consul.agent.service.register(details, function(err){
+	if(err) throw err;
+})
