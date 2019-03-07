@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 
 import os
 import cloudinary
+import requests
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -76,23 +77,30 @@ TEMPLATES = [
     },
 ]
 
+name = requests.get("http://127.0.0.1:8500/v1/kv/cloudinary/name?raw")
+name = name.content.decode("utf-8")
+key = requests.get("http://127.0.0.1:8500/v1/kv/cloudinary/key?raw")
+key = key.content.decode("utf-8")
+secret = requests.get("curl http://127.0.0.1:8500/v1/kv/cloudinary/secret?raw")
+secret = requests.content.decode("utf-8")
+
 # Cloudinary settings for Django. Add to your settings file.
 CLOUDINARY = {
-  'cloud_name': 'photovault',  
-  'api_key': '511629731985125',  
-  'api_secret': 'Hz9Vupt0SuSyLVxoev-L7yCAulE',  
+  'cloud_name': name,  
+  'api_key': key,  
+  'api_secret': secret,  
 }
 
 # Cloudinary settings using environment variables. Add to your .bashrc
-CLOUDINARY_CLOUD_NAME="photovault"  
-CLOUDINARY_API_KEY="511629731985125"  
-CLOUDINARY_API_SECRET="Hz9Vupt0SuSyLVxoev-L7yCAulE"  
+CLOUDINARY_CLOUD_NAME=name
+CLOUDINARY_API_KEY=key
+CLOUDINARY_API_SECRET=secret
 
 # Cloudinary settings using python code. Run before pycloudinary is used.
 cloudinary.config(
-  cloud_name = 'photovault',  
-  api_key = '511629731985125',  
-  api_secret = 'Hz9Vupt0SuSyLVxoev-L7yCAulE'  
+  cloud_name = name,  
+  api_key = key,  
+  api_secret = secret  
 )
 
 WSGI_APPLICATION = 'django_test_project.wsgi.application'
@@ -100,23 +108,21 @@ WSGI_APPLICATION = 'django_test_project.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
-"""
-DATABASES = {
 
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
-"""
+host = requests.get("http://127.0.0.1:8500/v1/kv/mongo/host?raw")
+host = host.content.decode("utf-8")
+user = requests.get("http://127.0.0.1:8500/v1/kv/mongo/user?raw")
+user = db_name.content.decode("utf-8")
+password = requests.get("http://127.0.0.1:8500/v1/kv/mongo/password?raw")
+password = password.content.decode("utf-8")
 
 DATABASES = {
      'default': {
          'ENGINE': 'djongo',
          'NAME': 'photovault',
-         'HOST': 'mongodb://dev:dev1PhotoVault@ds161804.mlab.com:61804/photovault',
-         'USER': 'dev',
-         'PASSWORD': 'dev1PhotoVault',
+         'HOST': host,
+         'USER': user,
+         'PASSWORD': password,
      }
  }
 
