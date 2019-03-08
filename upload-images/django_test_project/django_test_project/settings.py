@@ -82,7 +82,7 @@ name = name.content.decode("utf-8")
 key = requests.get("http://127.0.0.1:8500/v1/kv/cloudinary/key?raw")
 key = key.content.decode("utf-8")
 secret = requests.get("http://127.0.0.1:8500/v1/kv/cloudinary/secret?raw")
-secret = requests.content.decode("utf-8")
+secret = secret.content.decode("utf-8")
 
 # Cloudinary settings for Django. Add to your settings file.
 CLOUDINARY = {
@@ -112,7 +112,7 @@ WSGI_APPLICATION = 'django_test_project.wsgi.application'
 host = requests.get("http://127.0.0.1:8500/v1/kv/mongo/host?raw")
 host = host.content.decode("utf-8")
 user = requests.get("http://127.0.0.1:8500/v1/kv/mongo/user?raw")
-user = db_name.content.decode("utf-8")
+user = user.content.decode("utf-8")
 password = requests.get("http://127.0.0.1:8500/v1/kv/mongo/password?raw")
 password = password.content.decode("utf-8")
 
