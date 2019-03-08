@@ -300,7 +300,7 @@ let details = {
 	name: 'searchService',
 	address : '',
 	check:{
-		http : 'http://localhost:5000',			
+		http : 'http://localhost:5000/test',			
 		interval: '10s',
 		deregistercriticalserviceafter:'1m'
 	}
