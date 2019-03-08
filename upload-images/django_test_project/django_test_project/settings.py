@@ -81,7 +81,7 @@ name = requests.get("http://127.0.0.1:8500/v1/kv/cloudinary/name?raw")
 name = name.content.decode("utf-8")
 key = requests.get("http://127.0.0.1:8500/v1/kv/cloudinary/key?raw")
 key = key.content.decode("utf-8")
-secret = requests.get("curl http://127.0.0.1:8500/v1/kv/cloudinary/secret?raw")
+secret = requests.get("http://127.0.0.1:8500/v1/kv/cloudinary/secret?raw")
 secret = requests.content.decode("utf-8")
 
 # Cloudinary settings for Django. Add to your settings file.
