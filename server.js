@@ -9,6 +9,7 @@ const passport = require("passport");
 const url = require("url");
 const cors = require("cors");
 const http = require("http");
+var consul = require("consul")();
 
 //DB connection
 const db = require("./config/keys").mongoURI;
@@ -294,3 +295,17 @@ app.use("/api/apiGateway", apiGateway);
 // Then use it before your routes are set up:
 //CI/CD test 
 module.exports = app;
+console.log("testing");
+let details = {
+	name: 'searchService',
+	address : '',
+	check:{
+		http : 'http://localhost:5000',			
+		interval: '10s',
+		deregistercriticalserviceafter:'1m'
+	}
+};
+console.log(details);
+consul.agent.service.register(details, function(err){
+	if(err) throw err;
+})
