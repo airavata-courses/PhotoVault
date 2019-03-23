@@ -296,7 +296,7 @@ app.use("/api/apiGateway", apiGateway);
 //CI/CD test 
 module.exports = app;
 console.log("testing");
-let details = {
+/*let details = {
 	name: 'searchService',
 	address : '',
 	check:{
@@ -308,4 +308,4 @@ let details = {
 console.log(details);
 consul.agent.service.register(details, function(err){
 	if(err) throw err;
-})
+})*/
