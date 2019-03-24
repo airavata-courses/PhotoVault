@@ -58,7 +58,7 @@ app.post("/", (request, response) => {
 
 		var options = {
 
-			hostname: "searchService.service.consul",
+			hostname: "149.165.156.42:5000",
 			port: 5000,
 			path: "/api/users/login",
 			method: "POST",
@@ -99,7 +99,7 @@ app.post("/", (request, response) => {
 			confirmPassword = request.body.confirmPassword; 
 
 			  var options = {
-				hostname: "searchService.service.consul",
+				  hostname: "149.165.156.42:5000",
 				port: 5000,
 				path: "/api/users/register",
 				method: "POST",
