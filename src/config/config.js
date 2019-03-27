@@ -1,4 +1,4 @@
-const AUTH_URL = 'http://149.165.157.198:30002';
+const AUTH_URL = 'http://149.165.156.42:5000';
 const SEARCH_URL = 'http://149.165.156.42:5000';
 const EXPLORE_URL = 'http://149.165.156.42:5000';
 const UPLOAD_URL = 'http://149.165.156.42:5000';
