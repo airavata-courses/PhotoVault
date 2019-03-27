@@ -58,7 +58,7 @@ app.post("/", (request, response) => {
 
 		var options = {
 
-			hostname: "http://149.165.156.42:5000",
+			hostname: "149.165.156.42:5000",
 			port: 5000,
 			path: "/api/users/login",
 			method: "POST",
