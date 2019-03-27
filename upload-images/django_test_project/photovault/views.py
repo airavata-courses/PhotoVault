@@ -29,6 +29,7 @@ def home(request):
     userId = request.GET["userId"]
     isPublic = request.GET["isPublic"]
     isPublic = str(isPublic)
+    print(url, location)
     current_dir = os.getcwd()
     directory = current_dir+"/django_test_project/basic.py"
     subprocess.Popen(["python", directory, url, caption, location, userId, isPublic], close_fds=True)
