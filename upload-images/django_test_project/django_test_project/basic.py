@@ -59,6 +59,7 @@ def insertdb(url, caption, location, userId, isPublic):
     #name = fileName.split(".")[0]
     #num = random.randint(1, 100000) 
     #fileId = name+str(num)
+
     dateUpload = datetime.datetime.now()
     if isPublic == "false" or isPublic == "False":
         isPublic = False 
