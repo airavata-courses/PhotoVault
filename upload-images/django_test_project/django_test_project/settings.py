@@ -77,30 +77,24 @@ TEMPLATES = [
     },
 ]
 
-name = requests.get("http://127.0.0.1:8500/v1/kv/cloudinary/name?raw")
-name = name.content.decode("utf-8")
-key = requests.get("http://127.0.0.1:8500/v1/kv/cloudinary/key?raw")
-key = key.content.decode("utf-8")
-secret = requests.get("http://127.0.0.1:8500/v1/kv/cloudinary/secret?raw")
-secret = secret.content.decode("utf-8")
 
 # Cloudinary settings for Django. Add to your settings file.
 CLOUDINARY = {
-  'cloud_name': name,  
-  'api_key': key,  
-  'api_secret': secret,  
+  'cloud_name': 'photovault',  
+  'api_key': '511629731985125',  
+  'api_secret': 'Hz9Vupt0SuSyLVxoev-L7yCAulE',  
 }
 
 # Cloudinary settings using environment variables. Add to your .bashrc
-CLOUDINARY_CLOUD_NAME=name
-CLOUDINARY_API_KEY=key
-CLOUDINARY_API_SECRET=secret
+CLOUDINARY_CLOUD_NAME=photovault
+CLOUDINARY_API_KEY=511629731985125
+CLOUDINARY_API_SECRET=Hz9Vupt0SuSyLVxoev-L7yCAulE
 
 # Cloudinary settings using python code. Run before pycloudinary is used.
 cloudinary.config(
-  cloud_name = name,  
-  api_key = key,  
-  api_secret = secret  
+  cloud_name = photovault,  
+  api_key = 511629731985125,  
+  api_secret = Hz9Vupt0SuSyLVxoev-L7yCAulE  
 )
 
 WSGI_APPLICATION = 'django_test_project.wsgi.application'
@@ -109,20 +103,14 @@ WSGI_APPLICATION = 'django_test_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-host = requests.get("http://127.0.0.1:8500/v1/kv/mongo/host?raw")
-host = host.content.decode("utf-8")
-user = requests.get("http://127.0.0.1:8500/v1/kv/mongo/user?raw")
-user = user.content.decode("utf-8")
-password = requests.get("http://127.0.0.1:8500/v1/kv/mongo/password?raw")
-password = password.content.decode("utf-8")
 
 DATABASES = {
      'default': {
          'ENGINE': 'djongo',
          'NAME': 'photovault',
-         'HOST': host,
-         'USER': user,
-         'PASSWORD': password,
+         'HOST': 'mongodb://dev:dev1PhotoVault@ds161804.mlab.com:61804/photovault',
+         'USER': 'dev',
+         'PASSWORD': 'dev1PhotoVault',
      }
  }
 
