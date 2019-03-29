@@ -67,7 +67,7 @@ class PhotoGallery extends React.Component {
       key: 'searchString'
     };
     axios
-      .post(constants.search, searchObject)
+      .post(constants.search+'/api/fileOps/searchString',searchObject)
       .then(res => {
         this.state.photos = [];
         for (let i = 0; i < res.data.total; i++) {
@@ -172,7 +172,7 @@ class PhotoGallery extends React.Component {
       key: 'explore'
     };
     axios
-      .post(constants.explore, explore)
+      .get(constants.explore+'/explore/true')
 
       .then(res => {
         console.log(res);

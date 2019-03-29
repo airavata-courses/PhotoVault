@@ -30,7 +30,7 @@ class Login extends Component {
     //console.log(newUser);
 
     axios
-      .post(constants.auth + '/', newUser)
+      .post(constants.auth + '/api/users/login', newUser)
       .then(res => {
         // Save to localStorage
         const { token } = res.data;
