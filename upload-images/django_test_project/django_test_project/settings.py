@@ -86,15 +86,15 @@ CLOUDINARY = {
 }
 
 # Cloudinary settings using environment variables. Add to your .bashrc
-CLOUDINARY_CLOUD_NAME=photovault
-CLOUDINARY_API_KEY=511629731985125
-CLOUDINARY_API_SECRET=Hz9Vupt0SuSyLVxoev-L7yCAulE
+CLOUDINARY_CLOUD_NAME='photovault'
+CLOUDINARY_API_KEY='511629731985125'
+CLOUDINARY_API_SECRET='Hz9Vupt0SuSyLVxoev-L7yCAulE'
 
 # Cloudinary settings using python code. Run before pycloudinary is used.
 cloudinary.config(
-  cloud_name = photovault,  
-  api_key = 511629731985125,  
-  api_secret = Hz9Vupt0SuSyLVxoev-L7yCAulE  
+  cloud_name = 'photovault',  
+  api_key = '511629731985125',  
+  api_secret = 'Hz9Vupt0SuSyLVxoev-L7yCAulE'  
 )
 
 WSGI_APPLICATION = 'django_test_project.wsgi.application'
