@@ -22,6 +22,8 @@ mongoose
 
 const app = express();
 app.use(cors());
+//app.options('*', cors());
+//app.use(cors({   'allowedHeaders': ['sessionId', 'Content-Type'],   'exposedHeaders': ['sessionId'],   'origin': '*',   'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',   'preflightContinue': false }));
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -274,15 +276,17 @@ require("./config/passport")(passport);
 // parse application/json
 app.use(bodyParser.json());
 // app.use(cors());
-app.use(cors({ origin: "http://localhost:3000" }));
-app.use(cors({ Origin: "localhost:3000"}));
+//app.use(cors({ origin: "http://149.165.157.198:30001" }));
+//app.use(cors({ Origin: "149.165.157.198:30001"}));
+//app.use(cors({ origin: '*' }));
+//app.use(cors({ origin: 'null' }));
 // app.use(function(req, res, next) {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header(
+  // res.header("Access-Control-Allow-Origin", "*");
+ //  res.header(
 //     "Access-Control-Allow-Headers",
-//     "Origin, X-Requested-With, Content-Type, Accept"
-//   );
-//   next();
+    // "Origin, X-Requested-With, Content-Type, Accept"
+  // );
+ //  next();
 // });
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));

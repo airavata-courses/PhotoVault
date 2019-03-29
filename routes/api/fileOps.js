@@ -10,14 +10,14 @@ const MediaFile = require('../../models/MediaFile');
 router.post(
   '/searchString', passport.authenticate("jwt", { session: false}),
   (req, res) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header(
-      'Access-Control-Allow-Headers',
-      'Origin, X-Requested-With, Content-Type, Accept'
-    );
-    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    
+	  res.header('Access-Control-Allow-Origin', '*');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept'
+  );
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
 
-    res.header('Access-Control-Allow-Origin', '*');
 
     console.log('Body = ', req.body);
 	  console.log("Query = ", req.query)
@@ -175,6 +175,13 @@ router.get(
   '/recent/:userId',
   passport.authenticate('jwt', { session: false }),
   (req, res) => {
+	  res.header('Access-Control-Allow-Origin', '*');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept'
+  );
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+
     console.log('userID = ', req.params.userId);
     var query = {
       userId: {
