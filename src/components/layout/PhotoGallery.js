@@ -142,21 +142,21 @@ class PhotoGallery extends React.Component {
           this.closeModal();
 
           const feed_post = {
-            key: 'upload',
-            endpoint: {
+            
+            
               URL: this.state.img_url,
               caption: this.state.caption,
               location: this.state.location,
               //date: Date.now().toString(),
               userId: localStorage.getItem('user'),
               isPublic: this.state.isPublic
-            },
-            service: 'uploadService'
+           
+           
           };
-
+	
           console.log('upload json', feed_post);
           axios
-            .post(constants.details + '/', feed_post)
+            .get(constants.details + '/upload/?URL='+ this.state.img_url+'&caption='+this.state.caption+'&location='+this.state.location+'&userId='+localStorage.getItem('user')+'&isPublic='+this.state.isPublic)
             .then(function(response) {
               console.log(response);
             })
@@ -171,6 +171,7 @@ class PhotoGallery extends React.Component {
       isPublic: 'true',
       key: 'explore'
     };
+	  console.log('In getPublicImages()');
     axios
       .get(constants.explore+'/explore/true')
 
@@ -184,7 +185,7 @@ class PhotoGallery extends React.Component {
         this.forceUpdate();
         this.setGalleryNotEmpty();
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err+'Error occured'));
   }
   getMyGallery() {
     axios
