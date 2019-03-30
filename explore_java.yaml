@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: explore
+  labels:
+   app: explore
+spec:
+  replicas: 3
+  selector:
+   matchLabels:
+    app: explore
+  template:
+    metadata:
+      labels:
+        app: explore
+    spec:
+      containers:
+      - name: explore
+        image: photovault/exploreimages:v2
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 6060
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: explore
+spec:
+  type: NodePort
+  selector:
+   app: explore
+  ports:
+  - protocol: TCP
+    port: 6060
+    targetPort: 6060
+    nodePort: 30003

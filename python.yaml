@@ -1,0 +1,35 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: upload-deployment
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        run: upload-services
+    spec:
+      containers:
+      - name: upload-container
+        image: photovault/upload:v2
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 30004
+          name: http
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: upload-services
+  labels:
+    run: upload-services
+spec:
+  selector:
+    run: upload-services
+  ports:
+  - protocol: TCP
+    targetPort: 8000
+    port: 30004
+    name: http
+    nodePort: 30004
+  type: NodePort
