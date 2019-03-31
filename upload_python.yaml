@@ -1,46 +1,50 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: explore
+  name: upload
   labels:
-   app: explore
+   app: upload
    kube-monkey/enabled: "enabled"
-   kube-monkey/identifier: "explore"
+   kube-monkey/identifier: "upload"
    kube-monkey/mtbf: '2'
    kube-monkey/kill-mode: "fixed"
-   kube-monkey/kill-value: "1"  
+   kube-monkey/kill-value: "1"
 spec:
   replicas: 3
   selector:
    matchLabels:
-    app: explore
+    app: upload
   template:
     metadata:
       labels:
-        app: explore
+        app: upload
         kube-monkey/enabled: "enabled"
-        kube-monkey/identifier: "explore"
+        kube-monkey/identifier: "upload"
         kube-monkey/mtbf: '2'
         kube-monkey/kill-mode: "fixed"
         kube-monkey/kill-value: "1"
     spec:
       containers:
-      - name: explore
-        image: photovault/exploreimages:v2
+      - name: upload
+        image: photovault/upload:v2
         imagePullPolicy: Always
         ports:
-        - containerPort: 6060
+        - containerPort: 8000
+          name: http
 ---
 kind: Service
 apiVersion: v1
 metadata:
-  name: explore
+  name: upload
+  labels:
+    run: upload
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
-   app: explore
+    run: upload
   ports:
   - protocol: TCP
-    port: 6060
-    targetPort: 6060
-    nodePort: 30003
+    targetPort: 8000
+    port: 8000
+    name: http
+    nodePort: 30004

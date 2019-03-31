@@ -4,6 +4,11 @@ metadata:
  name: loginsearch
  labels:
   app: loginsearch
+  kube-monkey/enabled: "enabled"
+  kube-monkey/identifier: "loginsearch"
+  kube-monkey/mtbf: '2'
+  kube-monkey/kill-mode: "fixed"
+  kube-monkey/kill-value: "1"
 spec:
  replicas: 3
  selector:
@@ -13,6 +18,11 @@ spec:
   metadata:
    labels:
     app: loginsearch
+    kube-monkey/enabled: "enabled"
+    kube-monkey/identifier: "loginsearch"
+    kube-monkey/mtbf: '2'
+    kube-monkey/kill-mode: "fixed"
+    kube-monkey/kill-value: "1"
   spec:
    containers:
    - name: loginsearch
@@ -27,7 +37,7 @@ apiVersion: v1
 metadata:
  name: loginsearch
 spec:
- type: NodePort
+ type: LoadBalancer
  selector:
   app: loginsearch
  ports:
@@ -35,3 +45,4 @@ spec:
    targetPort: 5000
    port: 5000
    nodePort: 30002
+
