@@ -55,7 +55,6 @@ class PhotoGallery extends React.Component {
   }
 
   handleChange = name => event => {
-    console.log(event.target.checked);
     this.setState({ [name]: event.target.checked });
   };
 
@@ -67,7 +66,7 @@ class PhotoGallery extends React.Component {
       key: 'searchString'
     };
     axios
-      .post(constants.search+'/api/fileOps/searchString',searchObject)
+      .post(constants.search + '/api/fileOps/searchString', searchObject)
       .then(res => {
         this.state.photos = [];
         for (let i = 0; i < res.data.total; i++) {
@@ -142,21 +141,29 @@ class PhotoGallery extends React.Component {
           this.closeModal();
 
           const feed_post = {
-            
-            
-              URL: this.state.img_url,
-              caption: this.state.caption,
-              location: this.state.location,
-              //date: Date.now().toString(),
-              userId: localStorage.getItem('user'),
-              isPublic: this.state.isPublic
-           
-           
+            URL: this.state.img_url,
+            caption: this.state.caption,
+            location: this.state.location,
+            //date: Date.now().toString(),
+            userId: localStorage.getItem('user'),
+            isPublic: this.state.isPublic
           };
-	
+
           console.log('upload json', feed_post);
           axios
-            .get(constants.details + '/upload/?URL='+ this.state.img_url+'&caption='+this.state.caption+'&location='+this.state.location+'&userId='+localStorage.getItem('user')+'&isPublic='+this.state.isPublic)
+            .get(
+              constants.details +
+                '/upload/?URL=' +
+                this.state.img_url +
+                '&caption=' +
+                this.state.caption +
+                '&location=' +
+                this.state.location +
+                '&userId=' +
+                localStorage.getItem('user') +
+                '&isPublic=' +
+                this.state.isPublic
+            )
             .then(function(response) {
               console.log(response);
             })
@@ -171,9 +178,9 @@ class PhotoGallery extends React.Component {
       isPublic: 'true',
       key: 'explore'
     };
-	  console.log('In getPublicImages()');
+    console.log('In getPublicImages()');
     axios
-      .get(constants.explore+'/explore/true')
+      .get(constants.explore + '/explore/true')
 
       .then(res => {
         console.log(res);
@@ -185,7 +192,7 @@ class PhotoGallery extends React.Component {
         this.forceUpdate();
         this.setGalleryNotEmpty();
       })
-      .catch(err => console.log(err+'Error occured'));
+      .catch(err => console.log(err + 'Error occured'));
   }
   getMyGallery() {
     axios
