@@ -144,7 +144,6 @@ class PhotoGallery extends React.Component {
             URL: this.state.img_url,
             caption: this.state.caption,
             location: this.state.location,
-            //date: Date.now().toString(),
             userId: localStorage.getItem('user'),
             isPublic: this.state.isPublic
           };
