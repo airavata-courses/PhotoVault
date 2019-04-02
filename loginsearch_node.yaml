@@ -26,7 +26,7 @@ spec:
   spec:
    containers:
    - name: loginsearch
-     image: photovault/loginsearch:v11
+     image: photovault/loginsearch
      imagePullPolicy: Always
      ports:
      - containerPort: 5000

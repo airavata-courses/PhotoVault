@@ -26,7 +26,7 @@ spec:
     spec:
       containers:
       - name: explore
-        image: photovault/exploreimages:v2
+        image: photovault/exploreimages
         imagePullPolicy: Always
         ports:
         - containerPort: 6060

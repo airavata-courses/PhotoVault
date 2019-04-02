@@ -1,23 +1,20 @@
-apiVersion: apps/v1
+apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
   name: upload
   labels:
-   app: upload
-   kube-monkey/enabled: "enabled"
-   kube-monkey/identifier: "upload"
-   kube-monkey/mtbf: '2'
-   kube-monkey/kill-mode: "fixed"
-   kube-monkey/kill-value: "1"
+    app: upload
+    kube-monkey/enabled: "enabled"
+    kube-monkey/identifier: "upload"
+    kube-monkey/mtbf: '2'
+    kube-monkey/kill-mode: "fixed"
+    kube-monkey/kill-value: "1"
 spec:
   replicas: 3
-  selector:
-   matchLabels:
-    app: upload
   template:
     metadata:
       labels:
-        app: upload
+        run: upload
         kube-monkey/enabled: "enabled"
         kube-monkey/identifier: "upload"
         kube-monkey/mtbf: '2'
@@ -26,7 +23,7 @@ spec:
     spec:
       containers:
       - name: upload
-        image: photovault/upload:v2
+        image: photovault/upload
         imagePullPolicy: Always
         ports:
         - containerPort: 8000
@@ -39,7 +36,6 @@ metadata:
   labels:
     run: upload
 spec:
-  type: LoadBalancer
   selector:
     run: upload
   ports:
@@ -48,3 +44,4 @@ spec:
     port: 8000
     name: http
     nodePort: 30004
+  type: LoadBalancer

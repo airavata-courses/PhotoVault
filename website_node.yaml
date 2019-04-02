@@ -26,7 +26,7 @@ spec:
     spec:
      containers:
      - name: website
-       image: photovault/website:v10
+       image: photovault/website
        imagePullPolicy: Always
        ports:
        - containerPort: 30001
