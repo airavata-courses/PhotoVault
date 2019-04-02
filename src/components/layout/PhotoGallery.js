@@ -177,7 +177,7 @@ class PhotoGallery extends React.Component {
       isPublic: 'true',
       key: 'explore'
     };
-    console.log('In getPublicImages()');
+
     axios
       .get(constants.explore + '/explore/true')
 
@@ -279,7 +279,6 @@ class PhotoGallery extends React.Component {
             isOpen={this.state.lightboxIsOpen}
           />
         }
-        {/* </div> */}
 
         <Modal
           visible={this.state.visible}
