@@ -16,4 +16,4 @@ docker-pycreds
 dockerpty
 pymongo
 urllib3
-python-consul
+python-consul 
