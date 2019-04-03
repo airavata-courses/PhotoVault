@@ -33,10 +33,12 @@ class Register extends Component {
       confirmPassword: this.state.confirmPassword,
       key: 'register'
     };
-    g;
+    console.log('okay');
     axios
       .post(constants.auth + '/api/users/register', newUser)
+
       .then(res => {
+        console.log('here');
         this.props.history.push('/login');
       })
       .catch(err => this.setState({ errors: err.response.data }));
