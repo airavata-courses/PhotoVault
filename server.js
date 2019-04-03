@@ -10,7 +10,7 @@ const url = require("url");
 const cors = require("cors");
 const http = require("http");
 var consul = require("consul")();
-
+ 
 //DB connection
 const db = require("./config/keys").mongoURI;
 
