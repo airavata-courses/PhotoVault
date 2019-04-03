@@ -3,7 +3,7 @@ import os
 import sys
 import requests
 #import consul
-
+ 
 if __name__ == '__main__':
     os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_test_project.settings')
     try:
