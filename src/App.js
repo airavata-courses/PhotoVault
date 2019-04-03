@@ -9,7 +9,7 @@ import Login from './components/auth/Login';
 import Register from './components/auth/Register';
 import Gallery from './components/layout/PhotoGallery';
 
-import './App.css';
+import './App.css'; 
 
 // Check for token
 if (localStorage.jwtToken) {
