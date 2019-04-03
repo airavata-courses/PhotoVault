@@ -6,6 +6,7 @@ const constants = require('../../config/config');
 class Register extends Component {
   constructor() {
     super();
+    console.log('in constaructor');
     this.state = {
       firstName: '',
       lastName: '',
@@ -24,7 +25,7 @@ class Register extends Component {
 
   onSubmit(e) {
     e.preventDefault();
-
+    console.log('in register');
     const newUser = {
       firstName: this.state.firstName,
       lastName: this.state.lastName,
