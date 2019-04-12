@@ -2,8 +2,8 @@
 const AUTH_URL = '/loginBackend';//vro -node 
 const SEARCH_URL = '/loginBackend';//mut -node
 const EXPLORE_URL = '/exploreBackend';//mut - java
-const UPLOAD_URL = 'http://149.165.157.198:30002';//mut - node
-const PICTURE_DET_URL = 'http://149.165.157.198:30004'; //python
+const UPLOAD_URL = '/loginBackend';//mut - node
+const PICTURE_DET_URL = '/uploadBackend'; //python
 module.exports = {
   search: SEARCH_URL,
   upload: UPLOAD_URL,
