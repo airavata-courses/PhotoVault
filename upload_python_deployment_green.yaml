@@ -1,0 +1,31 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: upload-green
+  labels:
+    app: upload
+    kube-monkey/enabled: "enabled"
+    kube-monkey/identifier: "upload"
+    kube-monkey/mtbf: '2'
+    kube-monkey/kill-mode: "fixed"
+    kube-monkey/kill-value: "1"
+spec:
+  replicas: 5
+  template:
+    metadata:
+      labels:
+        run: upload
+        kube-monkey/enabled: "enabled"
+        kube-monkey/identifier: "upload"
+        kube-monkey/mtbf: '2'
+        kube-monkey/kill-mode: "fixed"
+        kube-monkey/kill-value: "1"
+        color: green
+    spec:
+      containers:
+      - name: upload
+        image: photovault/upload
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8000
+          name: http

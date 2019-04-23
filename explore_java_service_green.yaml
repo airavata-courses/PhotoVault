@@ -1,0 +1,18 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: explore
+  labels:
+    app: explore
+spec:
+  type: LoadBalancer
+  selector:
+   app: explore
+   color: green
+  ports:
+  - protocol: TCP
+    port: 6060
+    targetPort: 6060
+    nodePort: 30003
+  externalIPs:
+  - 149.165.157.198

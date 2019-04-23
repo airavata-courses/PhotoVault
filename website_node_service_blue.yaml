@@ -1,0 +1,18 @@
+kind: Service
+apiVersion: v1
+metadata:
+ name: website
+ labels:
+  app: website
+spec:
+ type: LoadBalancer
+ selector:
+  app: website
+  color: blue
+ ports:
+ - protocol: TCP
+   port: 30001
+   targetPort: 30001
+   nodePort: 30001
+ externalIPs:
+  - 149.165.157.198

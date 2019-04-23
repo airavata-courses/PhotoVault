@@ -1,0 +1,19 @@
+kind: Service
+apiVersion: v1
+metadata:
+ name: loginsearch
+ labels:
+  app: loginsearch
+spec:
+ type: LoadBalancer
+ selector:
+  app: loginsearch
+  color: green
+ ports:
+ - protocol: TCP
+   targetPort: 5000
+   port: 5000
+   nodePort: 30002
+ externalIPs:
+  - 149.165.157.198
+

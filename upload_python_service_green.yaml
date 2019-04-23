@@ -1,0 +1,19 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: upload
+  labels:
+    run: upload
+spec:
+  selector:
+    run: upload
+    color: green
+  ports:
+  - protocol: TCP
+    targetPort: 8000
+    port: 8000
+    name: http
+    nodePort: 30004
+  externalIPs:
+  - 149.165.157.198
+  type: LoadBalancer
