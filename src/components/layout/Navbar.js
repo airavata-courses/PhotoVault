@@ -49,6 +49,7 @@ class Navbar extends Component {
     const ButtonLogOutGoogle = withRouter(({ history }) => (
       <GoogleLogout
         buttonText="Logout"
+        theme="dark"
         onLogoutSuccess={
           (this.logoutGoogle = response => {
             localStorage.clear();
