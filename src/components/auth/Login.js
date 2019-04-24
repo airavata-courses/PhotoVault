@@ -148,13 +148,15 @@ class Login extends Component {
                     align="center"
                     onClick={this.googleLogin()}
                   /> */}
-
-                  <GoogleLogin
-                    clientId="142731195876-3lnnr7g22qkq2bh2lk2i0h3mdigkbq1g.apps.googleusercontent.com" //CLIENTID NOT CREATED YET
-                    buttonText="LOGIN WITH GOOGLE"
-                    onSuccess={this.responseGoogle}
-                    onFailure={this.responseGoogleNotOk}
-                  />
+                  <div className="lead text-center">
+                    <GoogleLogin
+                      clientId="142731195876-3lnnr7g22qkq2bh2lk2i0h3mdigkbq1g.apps.googleusercontent.com" //CLIENTID NOT CREATED YET
+                      buttonText="LOGIN WITH GOOGLE"
+                      onSuccess={this.responseGoogle}
+                      onFailure={this.responseGoogleNotOk}
+                      theme="dark"
+                    />
+                  </div>
                 </form>
               </div>
             </div>
