@@ -37,7 +37,7 @@
     "react-tooltip": "^3.9.2"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "HOST=js-171-163.jetstream-cloud.org react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
