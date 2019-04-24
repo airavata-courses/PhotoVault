@@ -126,4 +126,51 @@ router.get(
   }
 );
 
+// @route   POST api/users/login/google
+// @desc    Login user / Get JWTToken
+// @access  Public
+
+router.post('/login/google', (req, res) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header(
+    'Access-Control-Allow-Headers',
+    'Origin, X-Requested-With, Content-Type, Accept'
+  );
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  const email = req.body.email;
+  // const password = req.body.password;
+
+  //Check for user
+  User.findOne({ email: email }).then(user => {
+    if (!user) {
+      console.log('ok');
+
+      const newUser = new User({
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email
+      });
+
+      newUser
+        .save()
+        .then(user => res.json(user))
+        .catch(err => console.log(err));
+    } else {
+      const payload = {
+        id: user.id,
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName
+      };
+      jwt.sign(payload, keys.secret, { expiresIn: 3600 }, (err, token) => {
+        res.json({
+          success: true,
+          token: 'Bearer ' + token
+        });
+        console.log('signed');
+      });
+    }
+  });
+});
+
 module.exports = router;
