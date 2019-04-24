@@ -22,9 +22,11 @@ class Login extends Component {
   };
 
   responseGoogle = response => {
-    console.log(response);
-    console.log(response.profileObj.name);
-    console.log(response.tokenObj.id_token);
+    //console.log(response);
+    //console.log(response.profileObj.name);
+    // console.log(response.tokenObj.id_token);
+    localStorage.setItem('isGoogle', 'true');
+    console.log(localStorage.getItem('isGoogle'));
     const newUser = {
       email: response.profileObj.email,
       isGoogle: 'true',
