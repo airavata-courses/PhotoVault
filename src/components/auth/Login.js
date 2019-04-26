@@ -3,7 +3,10 @@ import axios from 'axios';
 import classnames from 'classnames';
 import jwt_decode from 'jwt-decode';
 import GoogleLogin from 'react-google-login';
+import Auth from './Auth.js';
+import { Navbar, Button } from 'react-bootstrap';
 const constants = require('../../config/config');
+const auth = new Auth();
 
 class Login extends Component {
   constructor() {
@@ -20,6 +23,19 @@ class Login extends Component {
   responseGoogleNotOk = response => {
     console.log('Permission denied');
   };
+
+  login() {
+    auth.login();
+  }
+
+  checkLogin() {
+    auth.login();
+    auth.handleAuthentication();
+  }
+
+  logout() {
+    auth.logout();
+  }
 
   responseGoogle = response => {
     //console.log(response);
@@ -136,11 +152,24 @@ class Login extends Component {
                     {errors.password && (
                       <div className="invalid-feeback">{errors.password}</div>
                     )}
+                    <button
+                      type="button"
+                      class="btn btn-outline-primary btn-block "
+                      onClick={() => auth.login()}
+                    />
                   </div>
                   <input
                     type="submit"
                     className="btn btn-info btn-block mt-4"
                   />
+                  <Button
+                    id="qsLoginBtn"
+                    bsStyle="primary"
+                    className="btn-margin"
+                    onClick={this.checkLogin()}
+                  >
+                    Log In
+                  </Button>
                   <br />
                   <p className="lead text-center">Or</p>
                   {/* <GoogleLoginButton

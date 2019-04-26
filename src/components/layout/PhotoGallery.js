@@ -14,7 +14,10 @@ const constants = require('../../config/config');
 class PhotoGallery extends React.Component {
   constructor() {
     super();
-
+    console.log(localStorage.getItem('user'));
+    console.log(localStorage.getItem('firstName'));
+    console.log(localStorage.getItem('lastName'));
+    console.log(localStorage.getItem('userEmail'));
     this.state = {
       userId: '',
       picture: '',
