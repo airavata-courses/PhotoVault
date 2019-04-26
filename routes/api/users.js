@@ -10,7 +10,7 @@ const passport = require('passport');
 const validateRegisterInput = require('../../validation/register');
 const validateLoginInput = require('../../validation/login');
 
-// @route   GET api/users/test
+// @route   GET api/users/
 // @desc    Tests users route
 // @access  Public
 router.get('/test', function(req, res) {
@@ -150,26 +150,25 @@ router.post('/login/google', (req, res) => {
         lastName: req.body.lastName,
         email: req.body.email
       });
-
+      console.log('ok not found');
       newUser
         .save()
         .then(user => res.json(user))
         .catch(err => console.log(err));
-    } else {
-      const payload = {
-        id: user.id,
-        email: user.email,
-        firstName: user.firstName,
-        lastName: user.lastName
-      };
-      jwt.sign(payload, keys.secret, { expiresIn: 3600 }, (err, token) => {
-        res.json({
-          success: true,
-          token: 'Bearer ' + token
-        });
-        console.log('signed');
-      });
     }
+    const payload = {
+      id: user.id,
+      email: user.email,
+      firstName: user.firstName,
+      lastName: user.lastName
+    };
+    jwt.sign(payload, keys.secret, { expiresIn: 3600 }, (err, token) => {
+      res.json({
+        success: true,
+        token: 'Bearer ' + token
+      });
+      console.log('signed');
+    });
   });
 });
 
