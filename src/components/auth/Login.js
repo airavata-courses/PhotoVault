@@ -117,14 +117,14 @@ class Login extends Component {
           <div className="container">
             <div className="row">
               <div className="col-md-8 m-auto">
-                <h1 className="display-4 text-center">Log In _ Blue</h1>
-                <p className="lead text-center">
+                {/* <h1 className="display-4 text-center">Log In _ Blue</h1> */}
+                {/* <p className="lead text-center">
                   Sign in to your PhotoVault account
-                </p>
+                </p> */}
 
                 <form noValidate onSubmit={this.onSubmit}>
                   <div className="form-group">
-                    <input
+                    {/* <input
                       type="email"
                       className={classnames('form-control form-control-lg', {
                         'is-invalid': errors.email
@@ -133,13 +133,13 @@ class Login extends Component {
                       name="email"
                       value={this.state.email}
                       onChange={this.onChange}
-                    />
+                    /> */}
                     {errors.email && (
                       <div className="invalid-feeback">{errors.email}</div>
                     )}
                   </div>
                   <div className="form-group">
-                    <input
+                    {/* <input
                       type="password"
                       className={classnames('form-control form-control-lg', {
                         'is-invalid': errors.password
@@ -148,36 +148,39 @@ class Login extends Component {
                       name="password"
                       value={this.state.password}
                       onChange={this.onChange}
-                    />
+                    /> */}
                     {errors.password && (
                       <div className="invalid-feeback">{errors.password}</div>
                     )}
-                    <button
+                    {/* <button
                       type="button"
                       class="btn btn-outline-primary btn-block "
                       onClick={() => auth.login()}
-                    />
+                    /> */}
                   </div>
-                  <input
+                  {/* <input
                     type="submit"
                     className="btn btn-info btn-block mt-4"
-                  />
-                  <Button
+                  /> */}
+                  <Button variant="secondary" onClick={this.checkLogin()}>
+                    Redirecting
+                  </Button>
+                  {/* <Button
                     id="qsLoginBtn"
                     bsStyle="primary"
-                    className="btn-margin"
+                    className="btn-margin center"
                     onClick={this.checkLogin()}
                   >
-                    Log In
-                  </Button>
-                  <br />
-                  <p className="lead text-center">Or</p>
+                    Redirecting
+                  </Button> */}
+                  {/* <br />
+                  <p className="lead text-center">Or</p> */}
                   {/* <GoogleLoginButton
                     size="35px"
                     align="center"
                     onClick={this.googleLogin()}
                   /> */}
-                  <div className="lead text-center">
+                  {/* <div className="lead text-center">
                     <GoogleLogin
                       clientId="142731195876-3lnnr7g22qkq2bh2lk2i0h3mdigkbq1g.apps.googleusercontent.com" //CLIENTID NOT CREATED YET
                       buttonText="LOGIN WITH GOOGLE"
@@ -185,7 +188,7 @@ class Login extends Component {
                       onFailure={this.responseGoogleNotOk}
                       theme="dark"
                     />
-                  </div>
+                  </div> */}
                 </form>
               </div>
             </div>
