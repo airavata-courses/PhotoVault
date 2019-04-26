@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import classnames from 'classnames';
 import jwt_decode from 'jwt-decode';
+import { Link } from 'react-router-dom';
 import { Navbar, Button } from 'react-bootstrap';
 const constants = require('../../config/config');
 
@@ -150,7 +151,12 @@ class LoginOld extends Component {
                     Log In
                   </Button> */}
                   <br />
-                  <p className="lead text-center">Or</p>
+                  <p className="lead text-center">
+                    Don't have an account?&nbsp;
+                    <Link className="navbar-brand " to="/register">
+                      Sign Up
+                    </Link>
+                  </p>
                   {/* <GoogleLoginButton
                     size="35px"
                     align="center"

@@ -40,7 +40,7 @@ class Register extends Component {
 
       .then(res => {
         console.log('here');
-        this.props.history.push('/login');
+        this.props.history.push('/regular');
       })
       .catch(err => this.setState({ errors: err.response.data }));
   }
@@ -140,7 +140,6 @@ class Register extends Component {
                     </div>
                   )}
                 </div>
-
                 <input type="submit" className="btn btn-info btn-block mt-4" />
               </form>
             </div>
