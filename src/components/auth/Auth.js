@@ -149,10 +149,9 @@ export default class Auth {
     this.accessToken = null;
     this.idToken = null;
     this.expiresAt = 0;
-    //console.log('in logour');
+
     // Remove isLoggedIn flag from localStorage
     localStorage.setItem('isLoggedIn', false);
-    //console.log('done ', localStorage.removeItem('isLoggedIn'));
     this.userProfile = null;
 
     // this.auth0.logout({ return_to: window.location.origin });
@@ -170,7 +169,7 @@ export default class Auth {
   auth0 = new auth0.WebAuth({
     domain: 'dev-k02c6mm5.auth0.com',
     clientID: 'OourERyoR2rtCIrXyhY0kYnetOZuL9SG',
-    redirectUri: 'http://localhost:3000/callback',
+    redirectUri: 'http://149.165.171.163/callback',
     responseType: 'token id_token',
     scope: 'openid profile email'
   });
