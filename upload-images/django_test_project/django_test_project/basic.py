@@ -78,6 +78,7 @@ def insertdb(url, caption, location, userId, isPublic):
     photoVaultCollections = db.photovault_photomedia
     records = photoVaultCollections.insert_one({"src": url, "caption": caption, "dateUpload": dateUpload, "location": location, "userId": userId, "isPublic": isPublic, "thumbnail": url, "thumbnailWidth": thumbnailWidth, "thumbnailHeight": thumbnailHeight}) 
     print(records)
+    return "Record inserted"
 
 insertdb(url, caption, location, userId, isPublic)
     
