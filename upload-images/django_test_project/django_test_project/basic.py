@@ -80,6 +80,7 @@ def insertdb(url, caption, location, userId, isPublic):
     print(records)
     return "Record inserted"
 
-insertdb(url, caption, location, userId, isPublic)
-    
+#insertdb(url, caption, location, userId, isPublic)
+if (insertdb(url, caption, location, userId, isPublic) == "Record inserted"): 
+   response.status(200)    
     
