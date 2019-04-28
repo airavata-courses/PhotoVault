@@ -49,12 +49,12 @@ class PhotoGallery extends React.Component {
       isPublic: false
     });
   }
-
   closeModal() {
     this.setState({
       visible: false
     });
     document.getElementById('file').value = '';
+
   }
 
   handleChange = name => event => {
@@ -122,6 +122,9 @@ class PhotoGallery extends React.Component {
       currentImage: this.state.currentImage + 1
     });
   }
+  sleep(time) {
+    return new Promise(resolve => setTimeout(resolve, time));
+  }
   handleUpload = e => {
     const data = new FormData();
     data.append('file', this.state.selectedFile);
@@ -152,22 +155,23 @@ class PhotoGallery extends React.Component {
           };
 
           console.log('upload json', feed_post);
-          axios
-            .get(
-              constants.details +
-                '/upload/?URL=' +
-                this.state.img_url +
-                '&caption=' +
-                this.state.caption +
-                '&location=' +
-                this.state.location +
-                '&userId=' +
-                localStorage.getItem('user') +
-                '&isPublic=' +
-                this.state.isPublic
-            )
-            .then(function(response) {
-              console.log(response);
+         
+          axios.get(
+            constants.details +
+              '/upload/?URL=' +
+              this.state.img_url +
+              '&caption=' +
+              this.state.caption +
+              '&location=' +
+              this.state.location +
+              '&userId=' +
+              localStorage.getItem('user') +
+              '&isPublic=' +
+              this.state.isPublic
+          );
+          this.sleep(1000)
+            .then(response => {
+             this.getMyGallery();
             })
             .catch(err => console.log(err));
         } else {
@@ -196,7 +200,7 @@ class PhotoGallery extends React.Component {
       })
       .catch(err => console.log(err + 'Error occured'));
   }
-  getMyGallery() {
+  getMyGallery = event => {
     axios
       .get(
         constants.search + '/api/fileOps/recent/' + localStorage.getItem('user')
@@ -204,14 +208,22 @@ class PhotoGallery extends React.Component {
 
       .then(res => {
         console.log(res);
-        this.state.photos = [];
+        this.setState({
+          photos: []
+        });
+
+        const publicPhotos = [];
         for (let i = 0; i < res.data.media.length; i++) {
-          this.state.photos.push(res.data.media[i]);
+          publicPhotos.push(res.data.media[i]);
         }
+        this.setState({
+          photos: publicPhotos
+        });
+
         this.setGalleryNotEmpty();
       })
       .catch(err => console.log(err));
-  }
+  };
 
   render() {
     return (
