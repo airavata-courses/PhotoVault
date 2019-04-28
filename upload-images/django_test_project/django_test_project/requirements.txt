@@ -16,4 +16,7 @@ docker-pycreds
 dockerpty
 pymongo
 urllib3
-python-consul 
+python-consul
+requests-mock
+pytest-mongodb
+pytest 
