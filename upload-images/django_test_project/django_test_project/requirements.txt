@@ -17,3 +17,6 @@ dockerpty
 pymongo
 urllib3
 python-consul 
+requests-mock
+pytest-mongodb
+pytest
