@@ -9,7 +9,7 @@
     "server": "nodemon server.js",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "test": "mocha 'test/search.test.js'"
+    "test": "mocha"
   },
   "author": "Vrishali Bhor",
   "license": "ISC",
